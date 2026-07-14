@@ -1,0 +1,383 @@
+parameter;jenis;gender;min_age;max_age;val1_min;val1_max;val2_min;val2_max;status;cls;rekomendasi
+gula_darah;puasa;all;20;59;70;109;0;999;Normal;normal;
+gula_darah;puasa;all;20;59;110;999;0;999;Tinggi;tinggi;"Di atas batas normal (hiperglikemia):
+1.	Melakukan aktivitas fisik dengan intensitas sedang, yaitu selama 30 menit per hari dengan frekuensi minimal 3 kali seminggu
+2.	Konsumsi makanan dengan gizi seimbang
+3.	Konsumsi biji-bijian, kacang-kacangan, buah, sayur, dan membatasi makanan olahan (seperti nugget, mie, dan sosis)
+4.	Konsultasikan kondisi kesehatan kepada dokter"
+gula_darah;puasa;all;20;59;0;69;0;999;Rendah;rendah;"Di bawah batas normal (hipoglikemia):
+1.	Konsumsi makanan tinggi glukosa berupa karbohidrat sederhana seperti gula pasir, madu, susu murni, dan buah-buahan segar (apel dan pisang)
+2.	Mengurangi makanan yang mengandung lemak
+3.	Hindari aktivitas fisik yang berlebihan
+4.	Konsultasikan kondisi kesehatan kepada dokter"
+gula_darah;2 Jam Post Prandial;all;20;59;0;139;0;999;Normal;normal;
+gula_darah;2 Jam Post Prandial;all;20;59;140;999;0;999;Tinggi;tinggi;"Di atas batas normal (hiperglikemia):
+1.	Melakukan aktivitas fisik dengan intensitas sedang, yaitu selama 30 menit per hari dengan frekuensi minimal 3 kali seminggu
+2.	Konsumsi makanan dengan gizi seimbang
+3.	Konsumsi biji-bijian, kacang-kacangan, buah, sayur, dan membatasi makanan olahan (seperti nugget, mie, dan sosis)
+4.	Konsultasikan kondisi kesehatan kepada dokter"
+gula_darah;sewaktu;all;20;59;0;199;0;999;Normal;normal;
+gula_darah;sewaktu;all;20;59;200;999;0;999;Tinggi;tinggi;"Di atas batas normal (hiperglikemia):
+1.	Melakukan aktivitas fisik dengan intensitas sedang, yaitu selama 30 menit per hari dengan frekuensi minimal 3 kali seminggu
+2.	Konsumsi makanan dengan gizi seimbang
+3.	Konsumsi biji-bijian, kacang-kacangan, buah, sayur, dan membatasi makanan olahan (seperti nugget, mie, dan sosis)
+4.	Konsultasikan kondisi kesehatan kepada dokter"
+gula_darah;puasa;all;60;90;82;115;0;999;Normal;normal;
+gula_darah;puasa;all;60;90;116;999;0;999;Tinggi;tinggi;"Di atas batas normal (hiperglikemia):
+1.	Melakukan aktivitas fisik dengan intensitas sedang, yaitu selama 30 menit per hari dengan frekuensi minimal 3 kali seminggu
+2.	Konsumsi makanan dengan gizi seimbang
+3.	Konsumsi biji-bijian, kacang-kacangan, buah, sayur, dan membatasi makanan olahan (seperti nugget, mie, dan sosis)
+4.	Konsultasikan kondisi kesehatan kepada dokter"
+gula_darah;puasa;all;60;90;0;81;0;999;Rendah;rendah;"Di bawah batas normal (hipoglikemia):
+1.	Konsumsi makanan tinggi glukosa berupa karbohidrat sederhana seperti gula pasir, madu, susu murni, dan buah-buahan segar (apel dan pisang)
+2.	Mengurangi makanan yang mengandung lemak
+3.	Hindari aktivitas fisik yang berlebihan
+4.	Konsultasikan kondisi kesehatan kepada dokter"
+gula_darah;2 Jam Post Prandial;all;60;90;0;139;0;999;Normal;normal;
+gula_darah;2 Jam Post Prandial;all;60;90;140;999;0;999;Tinggi;tinggi;"Di atas batas normal (hiperglikemia):
+1.	Melakukan aktivitas fisik dengan intensitas sedang, yaitu selama 30 menit per hari dengan frekuensi minimal 3 kali seminggu
+2.	Konsumsi makanan dengan gizi seimbang
+3.	Konsumsi biji-bijian, kacang-kacangan, buah, sayur, dan membatasi makanan olahan (seperti nugget, mie, dan sosis)
+4.	Konsultasikan kondisi kesehatan kepada dokter"
+gula_darah;sewaktu;all;60;90;0;199;0;999;Normal;normal;
+gula_darah;sewaktu;all;60;90;200;999;0;999;Tinggi;tinggi;"Di atas batas normal (hiperglikemia):
+1.	Melakukan aktivitas fisik dengan intensitas sedang, yaitu selama 30 menit per hari dengan frekuensi minimal 3 kali seminggu
+2.	Konsumsi makanan dengan gizi seimbang
+3.	Konsumsi biji-bijian, kacang-kacangan, buah, sayur, dan membatasi makanan olahan (seperti nugget, mie, dan sosis)
+4.	Konsultasikan kondisi kesehatan kepada dokter"
+gula_darah;puasa;all;90;999;75;121;0;999;Normal;normal;
+gula_darah;puasa;all;90;999;122;999;0;999;Tinggi;tinggi;"Di atas batas normal (hiperglikemia):
+1.	Melakukan aktivitas fisik dengan intensitas sedang, yaitu selama 30 menit per hari dengan frekuensi minimal 3 kali seminggu
+2.	Konsumsi makanan dengan gizi seimbang
+3.	Konsumsi biji-bijian, kacang-kacangan, buah, sayur, dan membatasi makanan olahan (seperti nugget, mie, dan sosis)
+4.	Konsultasikan kondisi kesehatan kepada dokter"
+gula_darah;puasa;all;90;999;0;74;0;999;Rendah;rendah;"Di bawah batas normal (hipoglikemia):
+1.	Konsumsi makanan tinggi glukosa berupa karbohidrat sederhana seperti gula pasir, madu, susu murni, dan buah-buahan segar (apel dan pisang)
+2.	Mengurangi makanan yang mengandung lemak
+3.	Hindari aktivitas fisik yang berlebihan
+4.	Konsultasikan kondisi kesehatan kepada dokter"
+gula_darah;2 Jam Post Prandial;all;90;999;0;139;0;999;Normal;normal;
+gula_darah;2 Jam Post Prandial;all;90;999;140;999;0;999;Tinggi;tinggi;"Di atas batas normal (hiperglikemia):
+1.	Melakukan aktivitas fisik dengan intensitas sedang, yaitu selama 30 menit per hari dengan frekuensi minimal 3 kali seminggu
+2.	Konsumsi makanan dengan gizi seimbang
+3.	Konsumsi biji-bijian, kacang-kacangan, buah, sayur, dan membatasi makanan olahan (seperti nugget, mie, dan sosis)
+4.	Konsultasikan kondisi kesehatan kepada dokter"
+gula_darah;sewaktu;all;90;999;0;199;0;999;Normal;normal;
+gula_darah;sewaktu;all;90;999;200;999;0;999;Tinggi;tinggi;"Di atas batas normal (hiperglikemia):
+1.	Melakukan aktivitas fisik dengan intensitas sedang, yaitu selama 30 menit per hari dengan frekuensi minimal 3 kali seminggu
+2.	Konsumsi makanan dengan gizi seimbang
+3.	Konsumsi biji-bijian, kacang-kacangan, buah, sayur, dan membatasi makanan olahan (seperti nugget, mie, dan sosis)
+4.	Konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;pria;15;19;113;197;0;999;Normal;normal;
+kolesterol;all;pria;15;19;198;999;0;999;Tinggi;tinggi;"Di atas batas normal (hiperkolesterolemia):
+1.	Melakukan aktivitas fisik dengan intensitas sedang, yaitu minimal 30 menit per hari dengan frekuensi 4-6 kali seminggu
+2.	Melakukan diet rendah kalori dengan konsumsi buah dan sayur (? 5 porsi/hari), biji-bijian (? 6 porsi/hari), ikan, dan daging tanpa lemak
+3.	Menghindari merokok dan minuman beralkohol serta menurunkan kelebihan berat badan
+4.	Hindari makanan yang memicu peningkatan kadar kolesterol jahat, seperti jeroan, seafood, kuning telur, susu full cream, dan keju
+5.	Konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;pria;15;19;0;112;0;999;Rendah;rendah;"Di bawah batas normal (hipokolesterolemia)
+1.	Segera konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;wanita;15;19;119;200;0;999;Normal;normal;
+kolesterol;all;wanita;15;19;201;999;0;999;Tinggi;tinggi;"Di atas batas normal (hiperkolesterolemia):
+1.	Melakukan aktivitas fisik dengan intensitas sedang, yaitu minimal 30 menit per hari dengan frekuensi 4-6 kali seminggu
+2.	Melakukan diet rendah kalori dengan konsumsi buah dan sayur (? 5 porsi/hari), biji-bijian (? 6 porsi/hari), ikan, dan daging tanpa lemak
+3.	Menghindari merokok dan minuman beralkohol serta menurunkan kelebihan berat badan
+4.	Hindari makanan yang memicu peningkatan kadar kolesterol jahat, seperti jeroan, seafood, kuning telur, susu full cream, dan keju
+5.	Konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;wanita;15;19;0;199;0;999;Rendah;rendah;"Di bawah batas normal (hipokolesterolemia)
+1.	Segera konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;pria;20;24;124;218;0;999;Normal;normal;
+kolesterol;all;pria;20;24;219;999;0;999;Tinggi;tinggi;"Di atas batas normal (hiperkolesterolemia):
+1.	Melakukan aktivitas fisik dengan intensitas sedang, yaitu minimal 30 menit per hari dengan frekuensi 4-6 kali seminggu
+2.	Melakukan diet rendah kalori dengan konsumsi buah dan sayur (? 5 porsi/hari), biji-bijian (? 6 porsi/hari), ikan, dan daging tanpa lemak
+3.	Menghindari merokok dan minuman beralkohol serta menurunkan kelebihan berat badan
+4.	Hindari makanan yang memicu peningkatan kadar kolesterol jahat, seperti jeroan, seafood, kuning telur, susu full cream, dan keju
+5.	Konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;pria;20;24;0;123;0;999;Rendah;rendah;"Di bawah batas normal (hipokolesterolemia)
+1.	Segera konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;wanita;20;24;122;216;0;999;Normal;normal;
+kolesterol;all;wanita;20;24;217;999;0;999;Tinggi;tinggi;"Di atas batas normal (hiperkolesterolemia):
+1.	Melakukan aktivitas fisik dengan intensitas sedang, yaitu minimal 30 menit per hari dengan frekuensi 4-6 kali seminggu
+2.	Melakukan diet rendah kalori dengan konsumsi buah dan sayur (? 5 porsi/hari), biji-bijian (? 6 porsi/hari), ikan, dan daging tanpa lemak
+3.	Menghindari merokok dan minuman beralkohol serta menurunkan kelebihan berat badan
+4.	Hindari makanan yang memicu peningkatan kadar kolesterol jahat, seperti jeroan, seafood, kuning telur, susu full cream, dan keju
+5.	Konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;wanita;20;24;0;121;0;999;Rendah;rendah;"Di bawah batas normal (hipokolesterolemia)
+1.	Segera konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;pria;25;29;133;244;0;999;Normal;normal;
+kolesterol;all;pria;25;29;245;999;0;999;Tinggi;tinggi;"Di atas batas normal (hiperkolesterolemia):
+1.	Melakukan aktivitas fisik dengan intensitas sedang, yaitu minimal 30 menit per hari dengan frekuensi 4-6 kali seminggu
+2.	Melakukan diet rendah kalori dengan konsumsi buah dan sayur (? 5 porsi/hari), biji-bijian (? 6 porsi/hari), ikan, dan daging tanpa lemak
+3.	Menghindari merokok dan minuman beralkohol serta menurunkan kelebihan berat badan
+4.	Hindari makanan yang memicu peningkatan kadar kolesterol jahat, seperti jeroan, seafood, kuning telur, susu full cream, dan keju
+5.	Konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;pria;25;29;0;132;0;999;Rendah;rendah;"Di bawah batas normal (hipokolesterolemia)
+1.	Segera konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;wanita;25;29;128;222;0;999;Normal;normal;
+kolesterol;all;wanita;25;29;223;999;0;999;Tinggi;tinggi;"Di atas batas normal (hiperkolesterolemia):
+1.	Melakukan aktivitas fisik dengan intensitas sedang, yaitu minimal 30 menit per hari dengan frekuensi 4-6 kali seminggu
+2.	Melakukan diet rendah kalori dengan konsumsi buah dan sayur (? 5 porsi/hari), biji-bijian (? 6 porsi/hari), ikan, dan daging tanpa lemak
+3.	Menghindari merokok dan minuman beralkohol serta menurunkan kelebihan berat badan
+4.	Hindari makanan yang memicu peningkatan kadar kolesterol jahat, seperti jeroan, seafood, kuning telur, susu full cream, dan keju
+5.	Konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;wanita;25;29;0;127;0;999;Rendah;rendah;"Di bawah batas normal (hipokolesterolemia)
+1.	Segera konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;pria;30;34;138;254;0;999;Normal;normal;
+kolesterol;all;pria;30;34;255;999;0;999;Tinggi;tinggi;"Di atas batas normal (hiperkolesterolemia):
+1.	Melakukan aktivitas fisik dengan intensitas sedang, yaitu minimal 30 menit per hari dengan frekuensi 4-6 kali seminggu
+2.	Melakukan diet rendah kalori dengan konsumsi buah dan sayur (? 5 porsi/hari), biji-bijian (? 6 porsi/hari), ikan, dan daging tanpa lemak
+3.	Menghindari merokok dan minuman beralkohol serta menurunkan kelebihan berat badan
+4.	Hindari makanan yang memicu peningkatan kadar kolesterol jahat, seperti jeroan, seafood, kuning telur, susu full cream, dan keju
+5.	Konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;pria;30;34;0;137;0;999;Rendah;rendah;"Di bawah batas normal (hipokolesterolemia)
+1.	Segera konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;wanita;30;34;130;230;0;999;Normal;normal;
+kolesterol;all;wanita;30;34;231;999;0;999;Tinggi;tinggi;"Di atas batas normal (hiperkolesterolemia):
+1.	Melakukan aktivitas fisik dengan intensitas sedang, yaitu minimal 30 menit per hari dengan frekuensi 4-6 kali seminggu
+2.	Melakukan diet rendah kalori dengan konsumsi buah dan sayur (? 5 porsi/hari), biji-bijian (? 6 porsi/hari), ikan, dan daging tanpa lemak
+3.	Menghindari merokok dan minuman beralkohol serta menurunkan kelebihan berat badan
+4.	Hindari makanan yang memicu peningkatan kadar kolesterol jahat, seperti jeroan, seafood, kuning telur, susu full cream, dan keju
+5.	Konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;wanita;30;34;0;129;0;999;Rendah;rendah;"Di bawah batas normal (hipokolesterolemia)
+1.	Segera konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;pria;35;39;146;270;0;999;Normal;normal;
+kolesterol;all;pria;35;39;271;999;0;999;Tinggi;tinggi;"Di atas batas normal (hiperkolesterolemia):
+1.	Melakukan aktivitas fisik dengan intensitas sedang, yaitu minimal 30 menit per hari dengan frekuensi 4-6 kali seminggu
+2.	Melakukan diet rendah kalori dengan konsumsi buah dan sayur (? 5 porsi/hari), biji-bijian (? 6 porsi/hari), ikan, dan daging tanpa lemak
+3.	Menghindari merokok dan minuman beralkohol serta menurunkan kelebihan berat badan
+4.	Hindari makanan yang memicu peningkatan kadar kolesterol jahat, seperti jeroan, seafood, kuning telur, susu full cream, dan keju
+5.	Konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;pria;35;39;0;145;0;999;Rendah;rendah;"Di bawah batas normal (hipokolesterolemia)
+1.	Segera konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;wanita;35;39;140;242;0;999;Normal;normal;
+kolesterol;all;wanita;35;39;243;999;0;999;Tinggi;tinggi;"Di atas batas normal (hiperkolesterolemia):
+1.	Melakukan aktivitas fisik dengan intensitas sedang, yaitu minimal 30 menit per hari dengan frekuensi 4-6 kali seminggu
+2.	Melakukan diet rendah kalori dengan konsumsi buah dan sayur (? 5 porsi/hari), biji-bijian (? 6 porsi/hari), ikan, dan daging tanpa lemak
+3.	Menghindari merokok dan minuman beralkohol serta menurunkan kelebihan berat badan
+4.	Hindari makanan yang memicu peningkatan kadar kolesterol jahat, seperti jeroan, seafood, kuning telur, susu full cream, dan keju
+5.	Konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;wanita;35;39;0;139;0;999;Rendah;rendah;"Di bawah batas normal (hipokolesterolemia)
+1.	Segera konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;pria;40;44;151;268;0;999;Normal;normal;
+kolesterol;all;pria;40;44;269;999;0;999;Tinggi;tinggi;"Di atas batas normal (hiperkolesterolemia):
+1.	Melakukan aktivitas fisik dengan intensitas sedang, yaitu minimal 30 menit per hari dengan frekuensi 4-6 kali seminggu
+2.	Melakukan diet rendah kalori dengan konsumsi buah dan sayur (? 5 porsi/hari), biji-bijian (? 6 porsi/hari), ikan, dan daging tanpa lemak
+3.	Menghindari merokok dan minuman beralkohol serta menurunkan kelebihan berat badan
+4.	Hindari makanan yang memicu peningkatan kadar kolesterol jahat, seperti jeroan, seafood, kuning telur, susu full cream, dan keju
+5.	Konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;pria;40;44;0;150;0;999;Rendah;rendah;"Di bawah batas normal (hipokolesterolemia)
+1.	Segera konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;wanita;40;44;147;252;0;999;Normal;normal;
+kolesterol;all;wanita;40;44;253;999;0;999;Tinggi;tinggi;"Di atas batas normal (hiperkolesterolemia):
+1.	Melakukan aktivitas fisik dengan intensitas sedang, yaitu minimal 30 menit per hari dengan frekuensi 4-6 kali seminggu
+2.	Melakukan diet rendah kalori dengan konsumsi buah dan sayur (? 5 porsi/hari), biji-bijian (? 6 porsi/hari), ikan, dan daging tanpa lemak
+3.	Menghindari merokok dan minuman beralkohol serta menurunkan kelebihan berat badan
+4.	Hindari makanan yang memicu peningkatan kadar kolesterol jahat, seperti jeroan, seafood, kuning telur, susu full cream, dan keju
+5.	Konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;wanita;40;44;0;146;0;999;Rendah;rendah;"Di bawah batas normal (hipokolesterolemia)
+1.	Segera konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;pria;45;49;158;265;0;999;Normal;normal;
+kolesterol;all;pria;45;49;266;999;0;999;Tinggi;tinggi;"Di atas batas normal (hiperkolesterolemia):
+1.	Melakukan aktivitas fisik dengan intensitas sedang, yaitu minimal 30 menit per hari dengan frekuensi 4-6 kali seminggu
+2.	Melakukan diet rendah kalori dengan konsumsi buah dan sayur (? 5 porsi/hari), biji-bijian (? 6 porsi/hari), ikan, dan daging tanpa lemak
+3.	Menghindari merokok dan minuman beralkohol serta menurunkan kelebihan berat badan
+4.	Hindari makanan yang memicu peningkatan kadar kolesterol jahat, seperti jeroan, seafood, kuning telur, susu full cream, dan keju
+5.	Konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;pria;45;49;0;157;0;999;Rendah;rendah;"Di bawah batas normal (hipokolesterolemia)
+1.	Segera konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;wanita;45;49;152;265;0;999;Normal;normal;
+kolesterol;all;wanita;45;49;266;999;0;999;Tinggi;tinggi;"Di atas batas normal (hiperkolesterolemia):
+1.	Melakukan aktivitas fisik dengan intensitas sedang, yaitu minimal 30 menit per hari dengan frekuensi 4-6 kali seminggu
+2.	Melakukan diet rendah kalori dengan konsumsi buah dan sayur (? 5 porsi/hari), biji-bijian (? 6 porsi/hari), ikan, dan daging tanpa lemak
+3.	Menghindari merokok dan minuman beralkohol serta menurunkan kelebihan berat badan
+4.	Hindari makanan yang memicu peningkatan kadar kolesterol jahat, seperti jeroan, seafood, kuning telur, susu full cream, dan keju
+5.	Konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;wanita;45;49;0;151;0;999;Rendah;rendah;"Di bawah batas normal (hipokolesterolemia)
+1.	Segera konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;pria;50;54;158;277;0;999;Normal;normal;
+kolesterol;all;pria;50;54;278;999;0;999;Tinggi;tinggi;"Di atas batas normal (hiperkolesterolemia):
+1.	Melakukan aktivitas fisik dengan intensitas sedang, yaitu minimal 30 menit per hari dengan frekuensi 4-6 kali seminggu
+2.	Melakukan diet rendah kalori dengan konsumsi buah dan sayur (? 5 porsi/hari), biji-bijian (? 6 porsi/hari), ikan, dan daging tanpa lemak
+3.	Menghindari merokok dan minuman beralkohol serta menurunkan kelebihan berat badan
+4.	Hindari makanan yang memicu peningkatan kadar kolesterol jahat, seperti jeroan, seafood, kuning telur, susu full cream, dan keju
+5.	Konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;pria;50;54;0;157;0;999;Rendah;rendah;"Di bawah batas normal (hipokolesterolemia)
+1.	Segera konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;wanita;50;54;162;285;0;999;Normal;normal;
+kolesterol;all;wanita;50;54;286;999;0;999;Tinggi;tinggi;"Di atas batas normal (hiperkolesterolemia):
+1.	Melakukan aktivitas fisik dengan intensitas sedang, yaitu minimal 30 menit per hari dengan frekuensi 4-6 kali seminggu
+2.	Melakukan diet rendah kalori dengan konsumsi buah dan sayur (? 5 porsi/hari), biji-bijian (? 6 porsi/hari), ikan, dan daging tanpa lemak
+3.	Menghindari merokok dan minuman beralkohol serta menurunkan kelebihan berat badan
+4.	Hindari makanan yang memicu peningkatan kadar kolesterol jahat, seperti jeroan, seafood, kuning telur, susu full cream, dan keju
+5.	Konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;wanita;50;54;0;161;0;999;Rendah;rendah;"Di bawah batas normal (hipokolesterolemia)
+1.	Segera konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;pria;55;59;156;276;0;999;Normal;normal;
+kolesterol;all;pria;55;59;277;999;0;999;Tinggi;tinggi;"Di atas batas normal (hiperkolesterolemia):
+1.	Melakukan aktivitas fisik dengan intensitas sedang, yaitu minimal 30 menit per hari dengan frekuensi 4-6 kali seminggu
+2.	Melakukan diet rendah kalori dengan konsumsi buah dan sayur (? 5 porsi/hari), biji-bijian (? 6 porsi/hari), ikan, dan daging tanpa lemak
+3.	Menghindari merokok dan minuman beralkohol serta menurunkan kelebihan berat badan
+4.	Hindari makanan yang memicu peningkatan kadar kolesterol jahat, seperti jeroan, seafood, kuning telur, susu full cream, dan keju
+5.	Konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;pria;55;59;0;155;0;999;Rendah;rendah;"Di bawah batas normal (hipokolesterolemia)
+1.	Segera konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;wanita;55;59;172;300;0;999;Normal;normal;
+kolesterol;all;wanita;55;59;301;999;0;999;Tinggi;tinggi;"Di atas batas normal (hiperkolesterolemia):
+1.	Melakukan aktivitas fisik dengan intensitas sedang, yaitu minimal 30 menit per hari dengan frekuensi 4-6 kali seminggu
+2.	Melakukan diet rendah kalori dengan konsumsi buah dan sayur (? 5 porsi/hari), biji-bijian (? 6 porsi/hari), ikan, dan daging tanpa lemak
+3.	Menghindari merokok dan minuman beralkohol serta menurunkan kelebihan berat badan
+4.	Hindari makanan yang memicu peningkatan kadar kolesterol jahat, seperti jeroan, seafood, kuning telur, susu full cream, dan keju
+5.	Konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;wanita;55;59;0;171;0;999;Rendah;rendah;"Di bawah batas normal (hipokolesterolemia)
+1.	Segera konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;pria;60;64;159;276;0;999;Normal;normal;
+kolesterol;all;pria;60;64;277;999;0;999;Tinggi;tinggi;"Di atas batas normal (hiperkolesterolemia):
+1.	Melakukan aktivitas fisik dengan intensitas sedang, yaitu minimal 30 menit per hari dengan frekuensi 4-6 kali seminggu
+2.	Melakukan diet rendah kalori dengan konsumsi buah dan sayur (? 5 porsi/hari), biji-bijian (? 6 porsi/hari), ikan, dan daging tanpa lemak
+3.	Menghindari merokok dan minuman beralkohol serta menurunkan kelebihan berat badan
+4.	Hindari makanan yang memicu peningkatan kadar kolesterol jahat, seperti jeroan, seafood, kuning telur, susu full cream, dan keju
+5.	Konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;pria;60;64;0;158;0;999;Rendah;rendah;"Di bawah batas normal (hipokolesterolemia)
+1.	Segera konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;wanita;60;64;158;297;0;999;Normal;normal;
+kolesterol;all;wanita;60;64;298;999;0;999;Tinggi;tinggi;"Di atas batas normal (hiperkolesterolemia):
+1.	Melakukan aktivitas fisik dengan intensitas sedang, yaitu minimal 30 menit per hari dengan frekuensi 4-6 kali seminggu
+2.	Melakukan diet rendah kalori dengan konsumsi buah dan sayur (? 5 porsi/hari), biji-bijian (? 6 porsi/hari), ikan, dan daging tanpa lemak
+3.	Menghindari merokok dan minuman beralkohol serta menurunkan kelebihan berat badan
+4.	Hindari makanan yang memicu peningkatan kadar kolesterol jahat, seperti jeroan, seafood, kuning telur, susu full cream, dan keju
+5.	Konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;wanita;60;64;0;157;0;999;Rendah;rendah;"Di bawah batas normal (hipokolesterolemia)
+1.	Segera konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;pria;65;69;258;274;0;999;Normal;normal;
+kolesterol;all;pria;65;69;275;999;0;999;Tinggi;tinggi;"Di atas batas normal (hiperkolesterolemia):
+1.	Melakukan aktivitas fisik dengan intensitas sedang, yaitu minimal 30 menit per hari dengan frekuensi 4-6 kali seminggu
+2.	Melakukan diet rendah kalori dengan konsumsi buah dan sayur (? 5 porsi/hari), biji-bijian (? 6 porsi/hari), ikan, dan daging tanpa lemak
+3.	Menghindari merokok dan minuman beralkohol serta menurunkan kelebihan berat badan
+4.	Hindari makanan yang memicu peningkatan kadar kolesterol jahat, seperti jeroan, seafood, kuning telur, susu full cream, dan keju
+5.	Konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;pria;65;69;0;257;0;999;Rendah;rendah;"Di bawah batas normal (hipokolesterolemia)
+1.	Segera konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;wanita;65;69;171;303;0;999;Normal;normal;
+kolesterol;all;wanita;65;69;304;999;0;999;Tinggi;tinggi;"Di atas batas normal (hiperkolesterolemia):
+1.	Melakukan aktivitas fisik dengan intensitas sedang, yaitu minimal 30 menit per hari dengan frekuensi 4-6 kali seminggu
+2.	Melakukan diet rendah kalori dengan konsumsi buah dan sayur (? 5 porsi/hari), biji-bijian (? 6 porsi/hari), ikan, dan daging tanpa lemak
+3.	Menghindari merokok dan minuman beralkohol serta menurunkan kelebihan berat badan
+4.	Hindari makanan yang memicu peningkatan kadar kolesterol jahat, seperti jeroan, seafood, kuning telur, susu full cream, dan keju
+5.	Konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;wanita;65;69;0;170;0;999;Rendah;rendah;"Di bawah batas normal (hipokolesterolemia)
+1.	Segera konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;pria;70;999;144;265;0;999;Normal;normal;
+kolesterol;all;pria;70;999;266;999;0;999;Tinggi;tinggi;"Di atas batas normal (hiperkolesterolemia):
+1.	Melakukan aktivitas fisik dengan intensitas sedang, yaitu minimal 30 menit per hari dengan frekuensi 4-6 kali seminggu
+2.	Melakukan diet rendah kalori dengan konsumsi buah dan sayur (? 5 porsi/hari), biji-bijian (? 6 porsi/hari), ikan, dan daging tanpa lemak
+3.	Menghindari merokok dan minuman beralkohol serta menurunkan kelebihan berat badan
+4.	Hindari makanan yang memicu peningkatan kadar kolesterol jahat, seperti jeroan, seafood, kuning telur, susu full cream, dan keju
+5.	Konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;pria;70;999;0;143;0;999;Rendah;rendah;"Di bawah batas normal (hipokolesterolemia)
+1.	Segera konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;wanita;70;999;173;280;0;999;Normal;normal;
+kolesterol;all;wanita;70;999;281;999;0;999;Tinggi;tinggi;"Di atas batas normal (hiperkolesterolemia):
+1.	Melakukan aktivitas fisik dengan intensitas sedang, yaitu minimal 30 menit per hari dengan frekuensi 4-6 kali seminggu
+2.	Melakukan diet rendah kalori dengan konsumsi buah dan sayur (? 5 porsi/hari), biji-bijian (? 6 porsi/hari), ikan, dan daging tanpa lemak
+3.	Menghindari merokok dan minuman beralkohol serta menurunkan kelebihan berat badan
+4.	Hindari makanan yang memicu peningkatan kadar kolesterol jahat, seperti jeroan, seafood, kuning telur, susu full cream, dan keju
+5.	Konsultasikan kondisi kesehatan kepada dokter"
+kolesterol;all;wanita;70;999;0;172;0;999;Rendah;rendah;"Di bawah batas normal (hipokolesterolemia)
+1.	Segera konsultasikan kondisi kesehatan kepada dokter"
+asam_urat;all;pria;0;12;2;5,5;0;999;Normal;normal;
+asam_urat;all;pria;0;12;5,6;999;0;999;Tinggi;tinggi;"Di atas batas normal (hiperurisemia):
+1.	Menurunkan berat badan hingga ideal
+2.	Menghindari minuman beralkohol dan minuman yang mengandung pemanis buatan
+3.	Konsumsi makanan rendah lemak dan hindari makanan berkalori tinggi serta daging merah dan seafood berlebihan
+4.	Melakukan aktivitas fisik secara teratur dengan intensitas sedang
+5.	Konsultasikan kondisi kesehatan kepada dokter"
+asam_urat;all;pria;0;12;0;1,9;0;999;Rendah;rendah;"Di bawah batas normal (hipourisemia)
+1.	Segera konsultasikan kondisi kesehatan kepada dokter"
+asam_urat;all;wanita;0;12;2;5,5;0;999;Normal;normal;
+asam_urat;all;wanita;0;12;5,6;999;0;999;Tinggi;tinggi;"Di atas batas normal (hiperurisemia):
+1.	Menurunkan berat badan hingga ideal
+2.	Menghindari minuman beralkohol dan minuman yang mengandung pemanis buatan
+3.	Konsumsi makanan rendah lemak dan hindari makanan berkalori tinggi serta daging merah dan seafood berlebihan
+4.	Melakukan aktivitas fisik secara teratur dengan intensitas sedang
+5.	Konsultasikan kondisi kesehatan kepada dokter"
+asam_urat;all;wanita;0;12;0;1,9;0;999;Rendah;rendah;"Di bawah batas normal (hipourisemia)
+1.	Segera konsultasikan kondisi kesehatan kepada dokter"
+asam_urat;all;pria;13;59;4,4;7,6;0;999;Normal;normal;
+asam_urat;all;pria;13;59;7,7;999;0;999;Tinggi;tinggi;"Di atas batas normal (hiperurisemia):
+1.	Menurunkan berat badan hingga ideal
+2.	Menghindari minuman beralkohol dan minuman yang mengandung pemanis buatan
+3.	Konsumsi makanan rendah lemak dan hindari makanan berkalori tinggi serta daging merah dan seafood berlebihan
+4.	Melakukan aktivitas fisik secara teratur dengan intensitas sedang
+5.	Konsultasikan kondisi kesehatan kepada dokter"
+asam_urat;all;pria;13;59;0;4,3;0;999;Rendah;rendah;"Di bawah batas normal (hipourisemia)
+1.	Segera konsultasikan kondisi kesehatan kepada dokter"
+asam_urat;all;wanita;13;59;2,3;6,6;0;999;Normal;normal;
+asam_urat;all;wanita;13;59;6,7;999;0;999;Tinggi;tinggi;"Di atas batas normal (hiperurisemia):
+1.	Menurunkan berat badan hingga ideal
+2.	Menghindari minuman beralkohol dan minuman yang mengandung pemanis buatan
+3.	Konsumsi makanan rendah lemak dan hindari makanan berkalori tinggi serta daging merah dan seafood berlebihan
+4.	Melakukan aktivitas fisik secara teratur dengan intensitas sedang
+5.	Konsultasikan kondisi kesehatan kepada dokter"
+asam_urat;all;wanita;13;59;0;2,2;0;999;Rendah;rendah;"Di bawah batas normal (hipourisemia)
+1.	Segera konsultasikan kondisi kesehatan kepada dokter"
+asam_urat;all;pria;60;90;4,2;8;0;999;Normal;normal;
+asam_urat;all;pria;60;90;8,1;999;0;999;Tinggi;tinggi;"Di atas batas normal (hiperurisemia):
+1.	Menurunkan berat badan hingga ideal
+2.	Menghindari minuman beralkohol dan minuman yang mengandung pemanis buatan
+3.	Konsumsi makanan rendah lemak dan hindari makanan berkalori tinggi serta daging merah dan seafood berlebihan
+4.	Melakukan aktivitas fisik secara teratur dengan intensitas sedang
+5.	Konsultasikan kondisi kesehatan kepada dokter"
+asam_urat;all;pria;60;90;0;4,1;0;999;Rendah;rendah;"Di bawah batas normal (hipourisemia)
+1.	Segera konsultasikan kondisi kesehatan kepada dokter"
+asam_urat;all;wanita;60;90;3,5;7,3;0;999;Normal;normal;
+asam_urat;all;wanita;60;90;7,4;999;0;999;Tinggi;tinggi;"Di atas batas normal (hiperurisemia):
+1.	Menurunkan berat badan hingga ideal
+2.	Menghindari minuman beralkohol dan minuman yang mengandung pemanis buatan
+3.	Konsumsi makanan rendah lemak dan hindari makanan berkalori tinggi serta daging merah dan seafood berlebihan
+4.	Melakukan aktivitas fisik secara teratur dengan intensitas sedang
+5.	Konsultasikan kondisi kesehatan kepada dokter"
+asam_urat;all;wanita;60;90;0;3,4;0;999;Rendah;rendah;"Di bawah batas normal (hipourisemia)
+1.	Segera konsultasikan kondisi kesehatan kepada dokter"
+asam_urat;all;pria;91;999;3,5;8,3;0;999;Normal;normal;
+asam_urat;all;pria;91;999;8,4;999;0;999;Tinggi;tinggi;"Di atas batas normal (hiperurisemia):
+1.	Menurunkan berat badan hingga ideal
+2.	Menghindari minuman beralkohol dan minuman yang mengandung pemanis buatan
+3.	Konsumsi makanan rendah lemak dan hindari makanan berkalori tinggi serta daging merah dan seafood berlebihan
+4.	Melakukan aktivitas fisik secara teratur dengan intensitas sedang
+5.	Konsultasikan kondisi kesehatan kepada dokter"
+asam_urat;all;pria;91;999;0;3,4;0;999;Rendah;rendah;"Di bawah batas normal (hipourisemia)
+1.	Segera konsultasikan kondisi kesehatan kepada dokter"
+asam_urat;all;wanita;91;999;2,2;7,7;0;999;Normal;normal;
+asam_urat;all;wanita;91;999;7,8;999;0;999;Tinggi;tinggi;"Di atas batas normal (hiperurisemia):
+1.	Menurunkan berat badan hingga ideal
+2.	Menghindari minuman beralkohol dan minuman yang mengandung pemanis buatan
+3.	Konsumsi makanan rendah lemak dan hindari makanan berkalori tinggi serta daging merah dan seafood berlebihan
+4.	Melakukan aktivitas fisik secara teratur dengan intensitas sedang
+5.	Konsultasikan kondisi kesehatan kepada dokter"
+asam_urat;all;wanita;91;999;0;2,1;0;999;Rendah;rendah;"Di bawah batas normal (hipourisemia)
+1.	Segera konsultasikan kondisi kesehatan kepada dokter"
+tekanan_darah;all;all;all;all;0;89;0;59;Rendah;rendah;"Di bawah batas normal (hipotensi)
+1.	Memperbanyak konsumsi cairan minimal 8 gelas per hari, karena cairan dapat meningkatkan volume darah dan membantu mencegah dehidrasi
+2.	Membatasi konsumsi minuman berkafein dan beralkohol
+3.	Berolahraga secara teratur untuk meningkatkan tekanan darah
+4.	Mengkonsumsi makanan dalam porsi kecil tapi sering dan tidak langsung berdiri setelah makan
+5.	Konsultasikan kondisi kesehatan kepada dokter"
+tekanan_darah;all;all;all;all;90;139;60;89;Normal;normal;
+tekanan_darah;all;all;all;all;140;159;90;99;Hipertensi derajat 1;hipertensi derajat 1;"Di atas batas normal (hipertensi)
+1.	Membatasi konsumsi garam, daging merah, dan alkohol
+2.	Peningkatan konsumsi sayur, kacang-kacangan, buah, dan ikan laut
+3.	Penurunan berat badan dan menjaga berat badan ideal (IMT 18,5-22,9 kg/m2)
+4.	Melakukan aktivitas fisik teratur dengan intensitas ringan sampai sedang minimal 30 menit per hari
+5.	Konsultasikan kondisi kesehatan kepada dokter"
+tekanan_darah;all;all;all;all;160;179;100;109;Hipertensi derajat 2;hipertensi derajat 2;"Di atas batas normal (hipertensi)
+1.	Membatasi konsumsi garam, daging merah, dan alkohol
+2.	Peningkatan konsumsi sayur, kacang-kacangan, buah, dan ikan laut
+3.	Penurunan berat badan dan menjaga berat badan ideal (IMT 18,5-22,9 kg/m2)
+4.	Melakukan aktivitas fisik teratur dengan intensitas ringan sampai sedang minimal 30 menit per hari
+5.	Konsultasikan kondisi kesehatan kepada dokter"
+tekanan_darah;all;all;all;all;180;999;110;999;Hipertensi derajat 3;hipertensi derajat 3;"Di atas batas normal (hipertensi)
+1.	Membatasi konsumsi garam, daging merah, dan alkohol
+2.	Peningkatan konsumsi sayur, kacang-kacangan, buah, dan ikan laut
+3.	Penurunan berat badan dan menjaga berat badan ideal (IMT 18,5-22,9 kg/m2)
+4.	Melakukan aktivitas fisik teratur dengan intensitas ringan sampai sedang minimal 30 menit per hari
+5.	Konsultasikan kondisi kesehatan kepada dokter"

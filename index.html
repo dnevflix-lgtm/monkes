@@ -1,0 +1,2103 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kita Sehat - Sistem Informasi Kesehatan</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ SCREEN: ROLE SELECT ============ -->
+<div id="screen-role" class="auth-wrap">
+  <div class="logo-circle"><img src="Assets/logo.png" alt="Kita Sehat" onerror="this.style.display='none'"></div>
+  <div class="auth-card">
+    <h3 style="justify-content:center;">Siapa Anda?</h3>
+    <button class="role-btn" onclick="showScreen('screen-warga-login')">Warga</button>
+    <button class="role-btn" onclick="showScreen('screen-petugas-login')">Petugas Kesehatan</button>
+  </div>
+  <div class="footer-note">© Sistem Informasi Kesehatan Dasar</div>
+</div>
+
+<!-- ============ SCREEN: WARGA LOGIN ============ -->
+<div id="screen-warga-login" class="auth-wrap hidden">
+  <div class="logo-circle"><img src="Assets/logo.png" alt="Kita Sehat" onerror="this.style.display='none'"></div>
+  <div class="auth-card">
+    <h3>Isikan Data Diri Anda <button class="next-circle" onclick="doWargaLogin()">➔</button></h3>
+    <input id="warga-nama" class="auth-input" placeholder="Nama" autocomplete="off">
+    <select id="warga-gender" class="auth-select">      
+      <option value="">Jenis Kelamin</option>
+      <option value="Pria">Pria</option>
+      <option value="Wanita">Wanita</option> 
+    </select>
+    <div class="auth-error" id="warga-login-error"></div>
+  </div>
+</div>
+
+<!-- ============ SCREEN: PETUGAS LOGIN ============ -->
+<div id="screen-petugas-login" class="auth-wrap hidden">
+  <div class="logo-circle"><img src="Assets/logo.png" alt="Kita Sehat" onerror="this.style.display='none'"></div>
+  <div class="auth-card">
+    <h3>Masukkan Nama dan Kata Sandi <button class="next-circle" onclick="doPetugasLogin()">➔</button></h3>
+    <input id="petugas-nama" class="auth-input" placeholder="Nama" autocomplete="off">
+    <input id="petugas-pass" type="password" class="auth-input" placeholder="Kata Sandi" autocomplete="off">
+    <div class="auth-error" id="petugas-login-error"></div>
+  </div>
+</div>
+
+<!-- ============ WARGA APP SHELL ============ -->
+<div id="app-warga" class="hidden">
+  <div class="topbar">
+    <div class="topbar-left">
+      <img class="logo-sm" src="Assets/logo.png" onerror="this.style.display='none'">
+    </div>
+    <div class="topbar-right">
+      <button class="icon-btn" id="btn-home-alt" title="Kembali ke Dashboard" onclick="goWarga('dashboard')" style="display:none;">
+        <img class="logo-sm" src="Assets/home.png" onerror="this.style.display='none'">
+      </button>
+      <button class="icon-btn" id="btn-profile" title="Profil Saya" onclick="goWarga('profile')">
+        <img id="topbar-photo" class="logo-sm" src="Assets/account_circle.png" onerror="this.style.display='none'">
+      </button>
+      <button class="icon-btn" title="Keluar" onclick="logout()">
+        <img class="logo-sm" src="Assets/logout.png" onerror="this.style.display='none'">
+      </button>
+    </div>
+  </div>
+
+  <!-- ---- Warga Dashboard page ---- -->
+  <div id="page-warga-dashboard" class="main-content">
+    <div class="grid-2">
+      <!-- Hasil Pemeriksaan Form -->
+      <div class="card">
+        <h3 style="margin-top:0">Hasil Pemeriksaan</h3>
+        <div class="field-row">
+          <div>
+            <label class="field-label">Tanggal</label>
+            <input type="date" id="f-tanggal" class="input-blue">
+          </div>
+          <div>
+            <label class="field-label">Waktu</label>
+            <input type="time" id="f-waktu" class="input-blue">
+          </div>
+        </div>
+        <label class="field-label">Tekanan Darah</label>
+        <div class="field-row" style="align-items:center;">
+          <div><input type="number" id="f-sistolik" class="input-blue" placeholder="Sistolik"></div>
+          <div style="flex:0 0 14px;text-align:center;">/</div>
+          <div><input type="number" id="f-diastolik" class="input-blue" placeholder="Diastolik"></div>
+          <div style="flex:0 0 60px;font-size:12px;">mmHg</div>
+        </div>
+        <div class="field-row">
+          <div>
+            <label class="field-label">Gula Darah</label>
+            <div class="input-suffix"><input type="number" id="f-gula" class="input-blue" placeholder="---"><span>mg/dL</span></div>
+          </div>
+          <div>
+            <label class="field-label">Jenis Gula Darah</label>
+            <select id="f-jenisgula" class="input-blue">
+              <option value="">Pilih</option>
+              <option>Puasa</option>
+              <option>2 Jam Post Prandial</option>
+              <option>Sewaktu</option>
+            </select>
+          </div>
+        </div>
+        <label class="field-label">Kolesterol</label>
+        <div class="input-suffix"><input type="number" id="f-kolesterol" class="input-blue" placeholder="---"><span>mg/dL</span></div>
+        <label class="field-label">Asam Urat</label>
+        <div class="input-suffix"><input type="number" id="f-asamurat" class="input-blue" placeholder="---"><span>mg/dL</span></div>
+        <div style="text-align:right;margin-top:16px;">
+          <button class="btn-pill" onclick="submitPemeriksaan()">Simpan</button>
+        </div>
+      </div>
+
+      <!-- Grafik -->
+      <div class="chart-card">
+        <div class="chart-head">
+          <h3 style="margin:0">Grafik Pemantauan Bulanan</h3>
+          <button class="btn-outline-white" onclick="goWarga('history')">Riwayat</button>
+        </div>
+        <div class="chart-inner">
+          <div class="chart-title-row">
+            <span id="chart-title-text" style="font-weight:700;font-size:13px;">Hasil Pemeriksaan Gula Darah</span>
+            <select id="chart-year" class="year-select" onchange="renderChart()"></select>
+          </div>
+          <!-- Baris Navigasi & Kanvas Grafik (Pastikan hanya ada 1 baris ini) -->
+          <div style="display:flex;align-items:center;gap:12px; margin-top:8px;">
+            <button class="nav-arrow" onclick="changeChartType(-1)">←</button>
+            <div id="chart-svg-holder" style="flex:1; min-width:0; overflow:hidden;"></div>
+            <!-- Tooltip Elemen -->
+            <div id="chart-tooltip" style="position:absolute; background:rgba(0,0,0,0.8); color:#fff; padding:5px 10px; border-radius:5px; font-size:11px; display:none; pointer-events:none; z-index:100; white-space:nowrap;"></div>
+            <button class="nav-arrow" onclick="changeChartType(1)">→</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-bottom">
+      <div class="status-list">
+        <h3 style="margin-top:0">Status Kesehatan</h3>
+        <div id="status-list-body"></div>
+      </div>
+      <div class="reco-card">
+        <div class="reco-header">
+          <h3>Rekomendasi & Saran</h3>
+          <button class="ai-btn" onclick="askAI()">✨ Tanya AI</button>
+        </div>
+        <div id="reco-body" style="margin-top:10px;">Isi hasil pemeriksaan untuk melihat rekomendasi.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ---- Riwayat page ---- -->
+  <div id="page-warga-history" class="main-content hidden">
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:10px;">
+      <div class="page-title" style="margin:0;">Tabel Hasil Pemeriksaan Kesehatan Bulanan</div>
+    </div>
+    <div class="legend">
+      <span><i class="dot dot-r"></i>Rendah</span>
+      <span><i class="dot dot-n"></i>Normal</span>
+      <span><i class="dot dot-t"></i>Tinggi</span>
+      <span><i class="dot dot-h1"></i>Hipertensi Derajat 1</span>
+      <span><i class="dot dot-h2"></i>Hipertensi Derajat 2</span>
+      <span><i class="dot dot-h3"></i>Hipertensi Derajat 3</span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>No</th><th>Tanggal</th><th>Waktu</th><th>Tekanan Darah (mmHg)</th>
+            <th>Jenis Gula Darah</th><th>Gula Darah (mg/dL)</th><th>Kolesterol (mg/dL)</th><th>Asam Urat (mg/dL)</th>
+          </tr>
+        </thead>
+        <tbody id="history-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ---- Profile page ---- -->
+  <div id="page-warga-profile" class="main-content hidden">
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <h3 style="margin:0">Informasi Data Diri</h3>
+        <button class="btn-outline-white" onclick="saveProfile()">Simpan</button>
+      </div>
+      <div class="profile-grid" style="margin-top:18px;">
+        <div>
+          <label class="field-label">Jenis Kelamin*</label>
+          <select id="p-gender" class="input-blue">
+            <option value="">Jenis Kelamin</option>
+            <option>Pria</option><option>Wanita</option>
+          </select>
+          <label class="field-label">Nama Lengkap*</label>
+          <input id="p-nama" class="input-blue" placeholder="Nama" autocomplete="off">
+          <label class="field-label">Tanggal, Bulan, Tahun Lahir*</label>
+          <input type="date" id="p-tgl" class="input-blue">
+          <label class="field-label">Nomor Telepon</label>
+          <input id="p-telp" class="input-blue" placeholder="08----------">
+          <label class="field-label">Email</label>
+          <input id="p-email" class="input-blue" placeholder="----------@----.com">
+        </div>
+        <div class="profile-photo-wrap">
+          <div class="photo-circle" id="p-photo-circle">
+            <img class="logo-sm" src="Assets/account_circle.png" onerror="this.style.display='none'">
+          </div>
+          <label class="small-btn" style="cursor:pointer;">Ubah Foto +
+            <input type="file" id="p-photo-input" accept="image/*" style="display:none" onchange="handlePhoto(event)">
+          </label>
+          <label class="field-label" style="align-self:flex-start;">Catatan Kesehatan</label>
+          <textarea id="p-notes" class="notes"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="app-footer">© Sistem Informasi Kesehatan Dasar</footer>
+</div>
+
+<!-- ============ PETUGAS APP SHELL ============ -->
+<div id="app-petugas" class="hidden">
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+    </div>
+    <div class="topbar-right">
+      <button class="icon-btn" title="Keluar" onclick="logout()">
+        <img class="logo-sm" src="Assets/logout.png" onerror="this.style.display='none'">
+      </button>
+    </div>
+  </div>
+  <div class="app-container">
+    <div class="sidebar" id="petugas-sidebar">
+      <div class="logo-circle"><img src="Assets/logo.png" onerror="this.style.display='none'"></div>
+      <div class="sidebar-nav">
+        <button class="sidebar-item" data-p="ringkasan" onclick="goPetugas('ringkasan')">📄 Ringkasan</button>
+        <button class="sidebar-item" data-p="daftar" onclick="goPetugas('daftar')">👥 Daftar Warga</button>
+        <button class="sidebar-item" data-p="manajemen" onclick="goPetugas('manajemen')">🗄 Manajemen Data</button>
+      </div>
+    </div>
+
+    <div class="main-content">
+      <!-- Ringkasan -->
+      <div id="ppage-ringkasan">
+        <div class="top-controls">
+          <div class="page-title" style="margin:0;">PEMANTAUAN KESEHATAN WARGA</div>
+        </div>
+        <div class="top-row">
+          
+          <div class="card-white" style="display:flex;flex-direction:column;">
+            <h4 style="color:var(--red);margin-top:0;display:flex;align-items:center;gap:6px;">⚠ Presentase Indikasi Kesehatan</h4>
+            <div class="stat-grid" id="indikasi-grid" style="flex:1;"></div>
+          </div>
+          
+          <div style="display:flex; flex-direction:column; gap:14px;">
+            
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+              <div class="warga-count-card" style="padding:16px; display:block; text-align:center;">
+                <div style="font-size:12px;color:var(--navy);font-weight:700;margin-bottom:6px;">✅ Total Warga</div>
+                <div class="count-num" id="total-warga">0</div>
+                <div class="count-sub" id="total-warga-sub">Pria: 0 | Wanita: 0</div>
+              </div>
+              <div class="warga-count-card" style="padding:16px; display:block; text-align:center;">
+                <div style="font-size:12px;color:var(--navy);font-weight:700;margin-bottom:6px;">👥 Pemeriksaan</div>
+                <div class="count-num" id="total-periksa">0</div>
+                <div class="count-sub" id="total-periksa-sub">Pria: 0 | Wanita: 0</div>
+              </div>
+            </div>
+
+            <div class="card-white" style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+              <h4 style="margin-top:0; color:var(--navy);">Distribusi Gender</h4>
+              <div class="donut-wrap" style="margin:10px 0;"><div id="donut-total"></div></div>
+              <div class="donut-legend">
+                <span><i class="dot" style="background:#0b4d86"></i>Pria</span>
+                <span><i class="dot" style="background:#6dd5ed"></i>Wanita</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="card-white">
+          <h4 style="margin-top:0;color:var(--navy);">Rata-Rata Hasil Pemeriksaan Kesehatan</h4>
+          <div class="avg-grid" id="avg-grid"></div>
+        </div>
+      </div>
+
+      <!-- Daftar Warga -->
+      <div id="ppage-daftar" class="hidden">
+        <div class="top-controls">
+          <div class="page-title" style="margin:0;">Daftar Warga</div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <div class="search-bar"><span>🔍</span><input id="dw-search" placeholder="Cari Nama" onchange="renderDaftarWarga()"></div>
+          </div>
+        </div>
+        <div class="dw-layout">
+          <div class="filter-panel">
+            <h4 style="margin-top:0;">▽ Filter & Urutan</h4>
+            
+            <label class="field-label" style="font-size:11px; font-weight:600;">Urutan Nama</label>
+            <select id="filt-sort" onchange="renderDaftarWarga()" class="input-blue" style="margin-bottom:12px; background:var(--navy); color:#fff; border-radius:8px; padding:8px; font-size:12px; width:100%;">
+              <option value="asc">↑ Naik (A-Z)</option>
+              <option value="desc">↓ Turun (Z-A)</option>
+            </select>
+
+            <label class="field-label" style="font-size:11px; font-weight:600;">Karakteristik</label>
+            <select id="filt-gender" onchange="renderDaftarWarga()"><option value="">Jenis Kelamin</option><option>Pria</option><option>Wanita</option></select>
+            
+            <select id="filt-bp" onchange="renderDaftarWarga()">
+              <option value="">Status Tekanan Darah</option>
+              <option>Rendah</option>
+              <option>Normal</option>
+              <option>Tinggi</option>
+            </select>
+            
+            <select id="filt-gula" onchange="renderDaftarWarga()"><option value="">Status Gula Darah</option><option>Rendah</option><option>Normal</option><option>Tinggi</option></select>
+            <select id="filt-kol" onchange="renderDaftarWarga()"><option value="">Status Kolesterol</option><option>Rendah</option><option>Normal</option><option>Tinggi</option></select>
+            <select id="filt-ua" onchange="renderDaftarWarga()"><option value="">Status Asam Urat</option><option>Rendah</option><option>Normal</option><option>Tinggi</option></select>
+            
+            <button class="small-btn" onclick="resetDaftarWargaFilter()" style="width:100%; background:#e0453f; color:#fff; border:none; border-radius:8px; padding:8px; font-weight:700; margin-top:8px;">↻ Reset Filter</button>
+          </div>
+          <div style="flex:1;min-width:0;">
+            <div class="table-wrap">
+              <table>
+                <thead><tr>
+                  <th>No</th><th>Nama</th><th>Jenis Kelamin</th><th>Usia</th><th>Tekanan Darah</th>
+                  <th>Jenis Gula Darah</th><th>Gula Darah</th><th>Kolesterol</th><th>Asam Urat</th><th>Detail</th>
+                </tr></thead>
+                <tbody id="daftar-body"></tbody>
+              </table>
+            </div>
+            <div class="legend" style="margin-top:8px;">
+              <span><i class="dot dot-r"></i>Rendah</span>
+              <span><i class="dot dot-n"></i>Normal</span>
+              <span><i class="dot dot-t"></i>Tinggi</span>
+              <span><i class="dot dot-h1"></i>Hipertensi Derajat 1</span>
+              <span><i class="dot dot-h2"></i>Hipertensi Derajat 2</span>
+              <span><i class="dot dot-h3"></i>Hipertensi Derajat 3</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Manajemen Data -->
+      <div id="ppage-manajemen" class="hidden">
+        <div class="top-controls">
+          <div class="page-title" style="margin:0;">Manajemen Data Pemeriksaan</div>
+        </div>
+        
+        <div class="mgmt-tabs" style="flex-wrap: wrap;">
+          <button class="small-btn" id="mtab-add" onclick="switchMgmtTab('add')" style="background:var(--navy);color:#fff;">Input Pemeriksaan</button>
+          <button class="small-btn" id="mtab-del" onclick="switchMgmtTab('del')" style="background:#eef2f6;color:var(--navy);">Hapus Riwayat</button>
+          <button class="small-btn" id="mtab-akun" onclick="switchMgmtTab('akun')" style="background:#eef2f6;color:var(--navy);">Kelola Akun Warga</button>
+        </div>
+        
+        <div id="msec-add" class="card-white" style="max-width:600px;">
+          <div style="display:flex; gap:16px; margin-bottom:16px; background:#eef2f6; padding:12px; border-radius:8px;">
+            <label style="font-weight:600; color:var(--navy); cursor:pointer;">
+              <input type="radio" name="warga_mode" value="lama" checked onclick="toggleWargaMode()"> 🟢 Warga Lama (Sudah Terdaftar)
+            </label>
+            <label style="font-weight:600; color:var(--navy); cursor:pointer;">
+              <input type="radio" name="warga_mode" value="baru" onclick="toggleWargaMode()"> 🆕 Warga Baru (Registrasi Pertama)
+            </label>
+          </div>
+
+          <div id="warga-lama-fields" class="field-row">
+            <div style="flex:1;">
+              <label class="field-label">Pilih Warga</label>
+              <select id="madd-old-nama" class="input-blue">
+                <option value="">Pilih Warga --</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="warga-baru-fields" class="hidden">
+            <div class="field-row">
+              <div>
+                <label class="field-label">Nama Warga Baru</label>
+                <input type="text" id="madd-new-nama" class="input-blue" placeholder="Nama lengkap sesuai KTP">
+              </div>
+              <div>
+                <label class="field-label">Jenis Kelamin</label>
+                <select id="madd-new-gender" class="input-blue">
+                  <option value="Pria">Pria</option>
+                  <option value="Wanita">Wanita</option>
+                </select>
+              </div>
+            </div>
+            <div class="field-row">
+              <div>
+                <label class="field-label">Tanggal Lahir</label>
+                <input type="date" id="madd-new-birthdate" class="input-blue" onchange="calculateNewAge()">
+              </div>
+              <div style="display:flex; align-items:center;">
+                <span id="madd-new-age" style="background:#eef2f6; color:var(--navy); padding:6px 14px; border-radius:20px; font-weight:700; font-size:13px; margin-top: 15px;">Usia: -</span>
+              </div>
+            </div>
+          </div>
+
+          <hr style="border:0; border-top:1px solid #d4dce4; margin: 20px 0;">
+          
+          <div class="field-row">
+            <div><label class="field-label">Tanggal Pemeriksaan</label><input type="date" id="madd-tanggal" class="input-blue"></div>
+            <div><label class="field-label">Waktu</label><input type="time" id="madd-waktu" class="input-blue"></div>
+          </div>
+          <label class="field-label">Tekanan Darah (mmHg)</label>
+          <div class="field-row">
+            <div><input type="number" id="madd-sys" class="input-blue" placeholder="Sistolik"></div>
+            <div><input type="number" id="madd-dia" class="input-blue" placeholder="Diastolik"></div>
+          </div>
+          <div class="field-row">
+            <div><label class="field-label">Gula Darah (mg/dL)</label><input type="number" id="madd-gula" class="input-blue" placeholder="---"></div>
+            <div><label class="field-label">Jenis Pemeriksaan Gula</label>
+              <select id="madd-gula-type" class="input-blue">
+                <option value="">Pilih</option><option>Puasa</option><option>2 Jam Post Prandial</option><option>Sewaktu</option>
+              </select>
+            </div>
+          </div>
+          <div class="field-row">
+            <div><label class="field-label">Kolesterol (mg/dL)</label><input type="number" id="madd-kol" class="input-blue" placeholder="---"></div>
+            <div><label class="field-label">Asam Urat (mg/dL)</label><input type="number" id="madd-ua" class="input-blue" placeholder="---"></div>
+          </div>
+          
+          <div style="margin-top:20px;">
+            <button class="btn-pill" onclick="mgmtAddRecord()" style="width:100%; font-size:14px; padding:12px;">Simpan Data Pemeriksaan</button>
+          </div>
+        </div>
+          
+        <div id="msec-del" class="card-white hidden" style="max-width:600px;">
+          <h4 style="margin-top:0; color:var(--navy);">Hapus Riwayat Pemeriksaan</h4>
+          <p style="font-size:12px; color:#556e85; margin-bottom:16px;">Gunakan menu ini jika terjadi kesalahan input nilai medis pada tanggal tertentu.</p>
+          <label class="field-label">Pilih Warga</label>
+          <div style="display:flex;gap:10px;margin-bottom:14px; flex-wrap:wrap;">
+            <select id="mdel-nama" class="input-blue" style="flex:1; min-width: 200px;" onchange="mdelLoadRecords()">
+              <option value="">-- Pilih Warga --</option>
+            </select>
+            <button class="btn-pill" onclick="mdelLoadRecords()" style="padding:0 16px;">Muat Riwayat</button>
+          </div>
+          <label class="field-label">Pilih Riwayat Pemeriksaan</label>
+          <select id="mdel-record" class="input-blue" style="margin-bottom:20px;"></select>
+          <div>
+            <button class="btn-pill" style="background:var(--red); width:100%;" onclick="mgmtDeleteRecord()">Hapus Riwayat Terpilih</button>
+          </div>
+        </div>
+
+        <div id="msec-akun" class="card-white hidden" style="max-width:600px;">
+          <h4 style="margin-top:0; color:var(--red);">Hapus Akun & Data Warga</h4>
+          <p style="font-size:13px; color:#556e85; margin-bottom:16px; background:#ffebeb; padding:10px; border-radius:8px;"><b>⚠ PERHATIAN:</b> Menghapus akun akan memusnahkan <b>seluruh data profil beserta semua riwayat pemeriksaannya</b> secara permanen. Warga terkait harus registrasi ulang dari awal untuk kembali menggunakan sistem.</p>
+          <label class="field-label">Pilih Warga yang Akan Dihapus</label>
+          <div style="display:flex;gap:10px;margin-bottom:14px; flex-wrap:wrap;">
+            <select id="makun-nama" class="input-blue" style="flex:1; min-width:200px;">
+              <option value="">-- Pilih Warga --</option>
+            </select>
+            <button class="btn-pill" style="background:var(--red); padding:10px 24px;" onclick="mgmtDeleteAkunWarga()">Hapus Permanen</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="app-footer">© Sistem Informasi Kesehatan Dasar</footer>
+</div>
+
+<!-- Detail modal -->
+<div id="detail-modal" class="modal-overlay hidden">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="detail-modal-body"></div>
+  </div>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+
+<script>
+/* ================= CONFIG ================= */
+const PETUGAS_USER = 'admin';
+const PETUGAS_PASS = 'sehat123';
+const BACKEND_API_URL = "https://script.google.com/macros/s/AKfycbznL7zS1F4CxwShx2siGirYQqWJTNVT0BZ5UWGuMcdxQYA92PfCO8CVuokurUDQtZCa/exec";
+let currentUser = null;   // warga name (original casing)
+let currentRole = null;   // 'warga' | 'petugas'
+let mgmtTab = 'add';
+const MONTHS_ID = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+const MONTHS_SHORT = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
+let currentChartIdx = 0;
+const chartConfigs = [
+  { key: 'gula', title: 'Hasil Pemeriksaan Gula Darah', unit: 'mg/dL', color: '#6c9b71' }, // Hijau pudar
+  { key: 'tensi', title: 'Hasil Pemeriksaan Tekanan Darah', unit: 'mmHg', color: 'multiple' }, // Dua garis
+  { key: 'kolesterol', title: 'Hasil Pemeriksaan Kolesterol', unit: 'mg/dL', color: '#8d6e63' }, // Cokelat
+  { key: 'asam_urat', title: 'Hasil Pemeriksaan Asam Urat', unit: 'mg/dL', color: '#4dd0e1' } // Cyan/Biru muda
+];
+
+// Fungsi untuk mengganti jenis grafik (digunakan oleh tombol panah)
+function changeChartType(dir){
+  currentChartIdx += dir;
+  if (currentChartIdx < 0) currentChartIdx = chartConfigs.length - 1;
+  if (currentChartIdx >= chartConfigs.length) currentChartIdx = 0;
+  renderChart();
+}
+
+/* ================= HELPERS ================= */
+/* ================= SYSTEM RULES (DARI CSV) ================= */
+let healthRules = [];
+
+// Fungsi untuk memecah teks CSV menjadi Array of Objects
+function parseCSV(str) {
+    const arr = [];
+    let quote = false;
+    let row = 0, col = 0;
+    
+    for (let c = 0; c < str.length; c++) {
+        let cc = str[c], nc = str[c+1];
+        arr[row] = arr[row] || [];
+        arr[row][col] = arr[row][col] || '';
+
+        // Abaikan tanda kutip ganda jika berada di dalam string
+        if (cc == '"' && quote && nc == '"') { arr[row][col] += cc; ++c; continue; }
+        if (cc == '"') { quote = !quote; continue; } // Buka/Tutup kutipan
+        if (cc == ';' && !quote) { ++col; continue; } // Pemisah kolom
+        if (cc == '\r' && nc == '\n' && !quote) { ++row; col = 0; ++c; continue; } // Baris baru (Windows)
+        if (cc == '\n' && !quote) { ++row; col = 0; continue; } // Baris baru (Mac/Linux)
+        if (cc == '\r' && !quote) { ++row; col = 0; continue; } // Baris baru (Lama)
+        
+        arr[row][col] += cc;
+    }
+    
+    const headers = arr[0].map(h => h.trim().toLowerCase());
+    const data = [];
+    for (let i = 1; i < arr.length; i++) {
+        if (arr[i].length <= 1) continue; // Abaikan baris kosong
+        let obj = {};
+        for (let j = 0; j < headers.length; j++) {
+            obj[headers[j]] = arr[i][j] ? arr[i][j].trim() : '';
+        }
+        data.push(obj);
+    }
+    return data;
+}
+
+// Fungsi memuat CSV saat web dibuka
+async function loadHealthRules() {
+    try {
+        const response = await fetch('./Range Nilai Cek Kesehatan.csv');
+        const text = await response.text();
+        healthRules = parseCSV(text);
+        console.log("✅ Berhasil memuat aturan kesehatan:", healthRules.length, "aturan");
+    } catch (err) {
+        console.error("Gagal memuat aturan CSV:", err);
+    }
+}
+
+async function loadDashboardPetugas() {
+  // Pastikan fungsi ini dipanggil saat dashboard petugas terbuka
+  const allWarga = await listAllWarga(); // Pastikan fungsi listAllWarga mengambil action "getAllWarga"
+  renderDaftarWarga(allWarga);
+  renderRingkasan(allWarga);
+}
+
+// Panggil saat halaman dimuat
+window.addEventListener('DOMContentLoaded', async () => {
+    await loadHealthRules();
+    showScreen('screen-role'); // Pastikan ini sesuai dengan nama fungsi inisialisasi awal Anda
+});
+function todayStr(){ const d=new Date(); return d.toISOString().slice(0,10); }
+function nowTimeStr(){ const d=new Date(); return d.toTimeString().slice(0,5); }
+function toNum(v){ return (v===''||v===null||v===undefined) ? null : Number(v); }
+function fmt(v,unit){ return (v===null||v===undefined||isNaN(v)) ? '---' : (v+(unit?(' '+unit):'')); }
+function parseDateValue(dateStr){
+  if(!dateStr) return null;
+  const raw = String(dateStr).trim();
+  if(!raw) return null;
+
+  const datePart = raw.includes('T') ? raw.split('T')[0] : raw;
+  const parts = datePart.split(/[\/-]/);
+  if(parts.length === 3){
+    const [y,m,d] = parts.map(Number);
+    if(Number.isFinite(y) && Number.isFinite(m) && Number.isFinite(d) && m >= 1 && m <= 12 && d >= 1 && d <= 31){
+      const parsed = new Date(y, m - 1, d);
+      if(parsed.getFullYear() === y && parsed.getMonth() === m - 1 && parsed.getDate() === d) return parsed;
+    }
+  }
+
+  const parsed = new Date(raw);
+  return Number.isNaN(parsed.getTime()) ? null : parsed;
+}
+
+function fmtDateID(dateStr){
+  const parsed = parseDateValue(dateStr);
+  if(!parsed) return '-';
+  return parsed.getDate()+' '+MONTHS_ID[parsed.getMonth()]+' '+parsed.getFullYear();
+}
+function ageFromBirthdate(bd){
+  if(!bd || typeof bd !== 'string') return null;
+
+  const raw = bd.toString().trim();
+  if(!raw) return null;
+
+  const datePart = raw.includes('T') ? raw.split('T')[0] : raw;
+  const parts = datePart.split(/[\/-]/);
+  if(parts.length !== 3) return null;
+
+  const [y, m, d] = parts.map(Number);
+  if(!Number.isFinite(y) || !Number.isFinite(m) || !Number.isFinite(d)) return null;
+  if(m < 1 || m > 12 || d < 1 || d > 31) return null;
+
+  const b = new Date(y, m - 1, d);
+  if(b.getFullYear() !== y || b.getMonth() !== m - 1 || b.getDate() !== d) return null;
+
+  const now = new Date();
+  let age = now.getFullYear() - b.getFullYear();
+  const mDiff = now.getMonth() - b.getMonth();
+  if(mDiff < 0 || (mDiff === 0 && now.getDate() < b.getDate())) age--;
+  return Number.isFinite(age) ? age : null;
+}
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.remove('hidden'); t.style.opacity='1';
+  clearTimeout(window._toastTimer);
+  window._toastTimer = setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.classList.add('hidden'),300); }, 2200);
+}
+function openModal(html){
+  document.getElementById('detail-modal-body').innerHTML = html;
+  document.getElementById('detail-modal').classList.remove('hidden');
+}
+function closeModal(){ document.getElementById('detail-modal').classList.add('hidden'); }
+
+function showGlobalLoading(message = 'Memproses...'){
+  if (document.getElementById('global-loading-overlay')) return;
+  const overlay = document.createElement('div');
+  overlay.id = 'global-loading-overlay';
+  overlay.className = 'loading-overlay';
+  overlay.innerHTML = `<div class="loading-card"><div class="loading-spinner"></div><div>${message}</div></div>`;
+  document.body.appendChild(overlay);
+  document.body.classList.add('loading-active');
+}
+
+function hideGlobalLoading(){
+  const overlay = document.getElementById('global-loading-overlay');
+  if (overlay) overlay.remove();
+  document.body.classList.remove('loading-active');
+}
+
+function setButtonLoadingState(button){
+  if (!button) return;
+  button.classList.add('is-loading');
+  button.disabled = true;
+  button.setAttribute('aria-busy', 'true');
+}
+
+function restoreButtonLoadingState(button){
+  if (!button) return;
+  button.classList.remove('is-loading');
+  button.disabled = false;
+  button.removeAttribute('aria-busy');
+}
+
+document.addEventListener('click', async (event) => {
+  const button = event.target.closest('button');
+  if (!button || button.disabled) return;
+  if (button.getAttribute('data-no-loading') === 'true') return;
+  if (typeof button.onclick !== 'function') return;
+
+  event.stopImmediatePropagation();
+  const message = button.dataset.loadingMessage || 'Memproses...';
+  setButtonLoadingState(button);
+  showGlobalLoading(message);
+
+  const startedAt = performance.now();
+  try {
+    const result = button.onclick.call(button, event);
+    if (result && typeof result.then === 'function') {
+      await result;
+    }
+  } finally {
+    const elapsed = performance.now() - startedAt;
+    const minDuration = 450;
+    if (elapsed < minDuration) {
+      await new Promise(resolve => setTimeout(resolve, minDuration - elapsed));
+    }
+    restoreButtonLoadingState(button);
+    hideGlobalLoading();
+  }
+}, true);
+
+/* ================= STORAGE INTEGRATION (DATABASE GOOGLE SHEETS VIA API) ================= */
+
+/* ================= DATABASE API (ANTI-CORS) ================= */
+async function apiRequest(payload) {
+  // 👇 TAMBAHKAN BARIS INI
+  console.log("Mencoba mengirim data ke:", BACKEND_API_URL);
+  console.log("Data yang dikirim:", payload);
+  try {
+    const response = await fetch(BACKEND_API_URL, {
+      method: 'POST',
+      // 👇 PERHATIKAN: Blok 'headers' dihapus total di sini! 
+      // Dengan begini, browser tidak akan pernah memicu CORS Preflight.
+      body: JSON.stringify(payload)
+    });
+    
+    const res = await response.json();
+    if (!res.success) throw new Error(res.error || "Error server Google");
+    return res.data;
+  } catch (error) {
+    console.error("API Error:", error);
+    throw error;
+  }
+}
+
+// Semua fungsi di bawah ini SEKARANG CUKUP NUMPANG ke apiRequest
+async function getWarga(name){
+  try { return await apiRequest({ action: "getWarga", nama: name }); } 
+  catch(e) { return null; }
+}
+
+async function listAllWarga() {
+  try { return (await apiRequest({ action: "getAllWarga" })) || []; } 
+  catch(e) { return []; }
+}
+
+async function saveWargaData(rec){
+  try {
+    const payload = { action: "saveProfile", nama: rec.name, gender: rec.gender, birthdate: rec.birthdate, phone: rec.phone, email: rec.email, notes: rec.notes, photo: rec.photo };
+    await apiRequest(payload);
+    return true;
+  } catch(e) { return false; }
+}
+
+async function deleteWarga(name){
+  try { await apiRequest({ action: "deleteWarga", nama: name }); return true; } 
+  catch(e) { return false; }
+}
+
+// 5. Mengambil Semua Daftar Warga (Untuk Dashboard Admin)
+async function listAllWarga() {
+  try {
+    const data = await apiRequest({ action: "getAllWarga" });
+    return data || [];
+  } catch(e) { 
+    console.error("Gagal menarik semua warga:", e); 
+    return []; 
+  }
+}
+
+/* ================= STATUS RULES ================= */
+function getStatus(param, jenis, gender, age, val1, val2 = 0) {
+    if (val1 == null || val1 === '' || isNaN(val1)) return null;
+
+    // 1. [PERBAIKAN UMUR] Jika umur 0 atau kosong, asumsikan usia dewasa (misal: 30 tahun)
+    // Ini memastikan Kolesterol dan Gula Darah tetap memunculkan status meski warga belum isi Tgl Lahir
+    let currentAge = (!age || isNaN(age) || age === 0) ? 30 : Number(age);
+
+    let matchedRule = healthRules.find(r => {
+        // Cek Parameter
+        // Cek Parameter (Menghapus spasi dan garis bawah agar anti-gagal)
+        let csvParam = r.parameter.toLowerCase().replace(/_| /g, '');
+        let inputParam = param.toLowerCase().replace(/_| /g, '');
+        if (csvParam !== inputParam) return false;
+        
+        // 2. [PERBAIKAN JENIS GULA DARAH]
+        let rJenis = r.jenis.toLowerCase();
+        let pJenis = (jenis || '').toLowerCase();
+        // Jika form jenis gula darah dibiarkan "Pilih" atau kosong, paksa menjadi "sewaktu"
+        if (pJenis === 'pilih' || pJenis === '') pJenis = 'sewaktu';
+        
+        if (rJenis !== 'all' && rJenis !== pJenis) return false;
+        
+        // Cek Gender (asumsikan pria jika kosong agar rule tetap jalan)
+        let rGender = r.gender.toLowerCase();
+        let pGender = (gender || '').toLowerCase();
+        if (pGender === '') pGender = 'pria'; 
+        if (rGender !== 'all' && rGender !== pGender) return false;
+        
+        // Cek Rentang Usia
+        let minAge = r.min_age.toLowerCase() === 'all' ? 0 : Number(r.min_age);
+        let maxAge = r.max_age.toLowerCase() === 'all' ? 999 : Number(r.max_age);
+        if (currentAge < minAge || currentAge > maxAge) return false;
+        
+        // 3. [PERBAIKAN DESIMAL KOMA] 
+        // Ubah koma (2,5) menjadi titik (2.5) agar bisa dihitung oleh JavaScript
+        let min1 = Number(r.val1_min.toString().replace(',', '.'));
+        let max1 = Number(r.val1_max.toString().replace(',', '.'));
+        
+        if (param.toLowerCase() === 'tekanan_darah') {
+            let min2 = Number(r.val2_min.toString().replace(',', '.'));
+            let max2 = Number(r.val2_max.toString().replace(',', '.'));
+            return (val1 >= min1 && val1 <= max1) || (val2 >= min2 && val2 <= max2);
+        } else {
+            return (val1 >= min1 && val1 <= max1);
+        }
+    });
+
+    if (matchedRule) {
+        return {
+            label: matchedRule.status,
+            cls: matchedRule.cls, 
+            rekomendasi: matchedRule.rekomendasi
+        };
+    }
+    return null; 
+}
+
+
+function badgeClass(cls) {
+    if (!cls) return '';
+    // Ubah huruf kecil dan ganti spasi dengan strip
+    const safeCls = cls.toLowerCase().replace(/\s+/g, '-');
+    
+    const mapping = {
+        'rendah': 'badge-rendah',
+        'normal': 'badge-normal',
+        'tinggi': 'badge-tinggi',
+        'hipertensi-derajat-1': 'badge-hipertensi-1',
+        'hipertensi-derajat-2': 'badge-hipertensi-2',
+        'hipertensi-derajat-3': 'badge-hipertensi-3'
+    };
+    return mapping[safeCls] || 'badge-normal'; // Default ke normal jika tidak ditemukan
+}
+
+function dotClass(cls) {
+    if (!cls) return '';
+    const safeCls = cls.toLowerCase().replace(/\s+/g, '-');
+    
+    const mapping = {
+        'rendah': 'dot-r',
+        'normal': 'dot-n',
+        'normal-tinggi': 'dot-w',
+        'tinggi': 'dot-t',
+        'hipertensi-derajat-1': 'dot-h1',
+        'hipertensi-derajat-2': 'dot-h2',
+        'hipertensi-derajat-3': 'dot-h3'
+    };
+    return mapping[safeCls] || 'dot-n';
+}
+/* ================= SCREEN NAVIGATION ================= */
+function showScreen(id){
+  ['screen-role','screen-warga-login','screen-petugas-login'].forEach(s=>{
+    document.getElementById(s).classList.toggle('hidden', s!==id);
+  });
+  document.getElementById('app-warga').classList.add('hidden');
+  document.getElementById('app-petugas').classList.add('hidden');
+  document.getElementById('warga-login-error').textContent='';
+  document.getElementById('petugas-login-error').textContent='';
+}
+function logout(){
+  currentUser = null; currentRole = null;
+  document.getElementById('warga-nama').value='';
+  document.getElementById('warga-gender').value='';
+  document.getElementById('petugas-nama').value='';
+  document.getElementById('petugas-pass').value='';
+  showScreen('screen-role');
+}
+
+/* ================= LOGIN ================= */
+async function doWargaLogin(){
+  const nama = document.getElementById('warga-nama').value.trim();
+  const gender = document.getElementById('warga-gender').value;
+  const err = document.getElementById('warga-login-error');
+  if(!nama){ err.textContent='Nama wajib diisi.'; return; }
+  if(!gender){ err.textContent='Jenis kelamin wajib dipilih.'; return; }
+  err.textContent='';
+  
+  try {
+    // Daftarkan/Login otomatis via backend
+    const profile = await apiRequest({ action: "loginOrRegister", nama: nama, gender: gender });
+    currentUser = profile.name;
+    currentRole = 'warga';
+    err.textContent='';
+    await enterWargaApp();
+  } catch(e) {
+    err.textContent = 'Gagal:' + e.message;
+  }
+}
+
+async function doPetugasLogin(){
+  const u = document.getElementById('petugas-nama').value.trim();
+  const p = document.getElementById('petugas-pass').value;
+  const err = document.getElementById('petugas-login-error');
+  if(u===PETUGAS_USER && p===PETUGAS_PASS){
+    err.textContent='';
+    currentRole='petugas';
+    await enterPetugasApp();
+  } else {
+    err.textContent='Nama atau kata sandi salah.';
+  }
+}
+
+/* ================= WARGA APP ================= */
+async function enterWargaApp(){
+  showScreen(null);
+  document.getElementById('app-warga').classList.remove('hidden');
+  document.getElementById('f-tanggal').value = todayStr();
+  document.getElementById('f-waktu').value = nowTimeStr();
+  await goWarga('dashboard');
+}
+async function goWarga(page){
+  ['dashboard','history','profile'].forEach(p=>{
+    document.getElementById('page-warga-'+p).classList.toggle('hidden', p!==page);
+  });
+  // Tampilkan/sembunyikan ikon home/profile berdasarkan halaman
+  const btnProfile = document.getElementById('btn-profile');
+  const btnHomeAlt = document.getElementById('btn-home-alt');
+  if(page==='profile'){
+    btnProfile.style.display = 'none';
+    btnHomeAlt.style.display = 'block';
+  } else if(page==='history'){
+    btnProfile.style.display = 'block';
+    btnHomeAlt.style.display = 'block';
+  } else {
+    btnProfile.style.display = 'block';
+    btnHomeAlt.style.display = 'none';
+  }
+  if(page==='dashboard') await refreshWargaDashboard();
+  if(page==='history') await renderHistory();
+  if(page==='profile') await loadProfile();
+}
+async function submitPemeriksaan() {
+  const btn = document.querySelector('button[onclick="submitPemeriksaan()"]');
+  if (!btn) return;
+  const oriText = btn.innerText;
+
+  btn.innerText = "Mengecek...";
+  btn.disabled = true;
+
+  try {
+    // 1. Cek Tanggal Lahir Warga
+    const rec = await getWarga(currentUser);
+    if (!rec || !rec.birthdate || rec.birthdate.trim() === "") {
+      alert("Mohon lengkapi Tanggal Lahir dan Jenis Kelamin Anda di menu Profil terlebih dahulu agar sistem dapat menganalisis hasil pemeriksaan dengan akurat.");
+      goWarga('profile'); 
+      return; 
+    }
+
+    // 2. Ambil nilai dengan ID yang benar
+    const tanggal = document.getElementById('f-tanggal').value;
+    const waktu = document.getElementById('f-waktu').value;
+    const sys = document.getElementById('f-sistolik').value;     
+    const dia = document.getElementById('f-diastolik').value;    
+    const gType = document.getElementById('f-jenisgula').value;  
+    const gula = document.getElementById('f-gula').value;
+    const kol = document.getElementById('f-kolesterol').value;   
+    const au = document.getElementById('f-asamurat').value;      
+
+    if (!tanggal || !waktu) {
+      alert("Tanggal dan Waktu wajib diisi!");
+      return; 
+    }
+
+    btn.innerText = "Menyimpan...";
+
+    // 3. Susun data untuk dikirim
+    const payload = {
+      action: "addRecord",
+      nama: currentUser,
+      date: tanggal,
+      time: waktu,
+      systolic: sys,
+      diastolic: dia,
+      bloodSugarType: gType,
+      bloodSugar: gula,
+      cholesterol: kol,
+      uricAcid: au
+    };
+
+    // 👇 PERBAIKAN: Gunakan fungsi apiRequest yang kebal CORS
+    // Tidak perlu lagi pakai fetch manual dan application/json
+    await apiRequest(payload); 
+
+    // 4. Kosongkan Form setelah berhasil
+    document.getElementById('f-sistolik').value = '';
+    document.getElementById('f-diastolik').value = '';
+    document.getElementById('f-jenisgula').value = '';
+    document.getElementById('f-gula').value = '';
+    document.getElementById('f-kolesterol').value = '';
+    document.getElementById('f-asamurat').value = '';
+      
+    alert("Data pemeriksaan berhasil disimpan ke Spreadsheet!");
+    await refreshWargaDashboard(); 
+
+  } catch (err) {
+    alert("Terjadi kesalahan sistem/jaringan: " + err.message);
+    console.error("Error saat submit pemeriksaan:", err);
+  } finally {
+    // Kembalikan tombol ke keadaan semula
+    btn.innerText = oriText;
+    btn.disabled = false;
+  }
+}
+
+async function refreshWargaDashboard(){
+  const rec = await getWarga(currentUser);
+  if(!rec) return;
+  await renderChart(rec);
+  renderStatusAndReco(rec);
+}
+function latestRecord(rec){
+  const recs = (rec.records||[]).slice().sort((a,b)=> {
+    // Parsing tanggal ke format standar YYYY-MM-DD agar selalu akurat saat diurutkan
+    const safeDate = (d) => {
+        if (!d) return '1970-01-01';
+        let s = d.toString().split('T')[0];
+        if (s.includes('/')) {
+            let p = s.split('/');
+            return `${p[2]}-${p[1].padStart(2, '0')}-${p[0].padStart(2, '0')}`;
+        }
+        return s;
+    };
+    
+    const dateA = safeDate(a.date);
+    const dateB = safeDate(b.date);
+    const timeA = a.time ? a.time.toString() : '00:00';
+    const timeB = b.time ? b.time.toString() : '00:00';
+    
+    // Urutkan dari terlama ke terbaru
+    return (dateA + timeA).localeCompare(dateB + timeB);
+  });
+  
+  // Ambil data paling ujung (paling terbaru)
+  return recs.length ? recs[recs.length-1] : null;
+}
+
+function renderStatusAndReco(rec) {
+    const latest = latestRecord(rec);
+    const gender = rec.gender;
+    const age = ageFromBirthdate(rec.birthdate) || 0;
+
+    // 1. Definisikan semua parameter yang akan diperiksa sesuai struktur CSV
+    const checks = [
+        { key: 'gula_darah', val: latest.bloodSugar, type: latest.bloodSugarType, icon: '🩸', label: 'Gula Darah', unit: 'mg/dL' },
+        { key: 'tekanan_darah', val: latest.systolic, val2: latest.diastolic, icon: '❤️', label: 'Tekanan Darah', unit: 'mmHg' },
+        { key: 'kolesterol', val: latest.cholesterol, icon: '🧪', label: 'Kolesterol', unit: 'mg/dL' },
+        { key: 'asam_urat', val: latest.uricAcid, icon: '💧', label: 'Asam Urat', unit: 'mg/dL' }
+    ];
+
+    const tips = [];
+    const statusDisplay = [];
+
+    // 2. Loop dinamis untuk setiap parameter
+    checks.forEach(c => {
+        // Panggil getStatus untuk setiap parameter
+        const st = getStatus(c.key, c.type || 'all', gender, age, c.val, c.val2 || 0);
+        
+        statusDisplay.push({ ...c, st });
+
+        // 3. Kumpulkan semua rekomendasi yang ditemukan
+        if (st && st.rekomendasi) {
+            // Pembersihan teks rekomendasi (menghapus nomor urut jika ada, membuat list baru)
+            let text = st.rekomendasi
+                .replace(/\n\d+\.\s*/g, '</li><li>') 
+                .replace(/\n/g, '<br>');
+            
+            // Masukkan ke dalam list tips
+            tips.push(`<li><b>${c.label} (${st.label}):</b> <ul style="margin-top:4px;"><li>${text}</li></ul></li>`);
+        }
+    });
+
+    // 4. Render baris status ke HTML
+    const body = document.getElementById('status-list-body');
+    body.innerHTML = statusDisplay.map(r => `
+        <div class="status-row">
+            <div class="status-left">
+                <span>${r.icon}</span>
+                <div>${r.label}<br><b>${r.val != null ? r.val + (r.val2 ? '/'+r.val2 : '') + ' ' + r.unit : '---'}</b></div>
+            </div>
+            ${r.st ? `<span class="status-badge ${badgeClass(r.st.cls)}">${r.st.label}</span>` : `<span class="status-badge" style="background:#7d93a8;">Belum Ada</span>`}
+        </div>
+    `).join('');
+
+    // 5. Render rekomendasi ke HTML
+    const recoBody = document.getElementById('reco-body');
+    if (!latest) {
+        recoBody.innerHTML = 'Isi hasil pemeriksaan untuk melihat rekomendasi.';
+    } else if (tips.length === 0) {
+        recoBody.innerHTML = 'Kondisi kesehatan Anda saat ini dalam kategori aman. Pertahankan gaya hidup sehat!';
+    } else {
+        recoBody.innerHTML = `<ul style="margin:0; padding-left:18px;">${tips.join('')}</ul>`;
+    }
+}
+
+/* ---- AI recommendation via Claude API ---- */
+// Tambahkan async di depan function agar perintah await bisa bekerja!
+async function askAI() {
+  const rec = await getWarga(currentUser);
+  const latest = latestRecord(rec);
+  
+  if(!latest){ 
+    alert('Belum ada data pemeriksaan untuk dianalisis.'); 
+    return; 
+  }
+  
+  const recoBody = document.getElementById('reco-body');
+  const prevHTML = recoBody.innerHTML;
+  recoBody.innerHTML = '<div style="color:var(--orange); font-weight:bold;">🤖 Dokter AI (Llama 3.1) sedang membedah data Anda secara kilat...</div>';
+  
+  const age = ageFromBirthdate(rec.birthdate);
+  const gender = rec.gender || 'pria';
+  
+  const prompt = `Kamu adalah dokter puskesmas desa yang ramah. Berikan saran gaya hidup sehat (maksimal 3 paragraf, bahasa Indonesia mudah dipahami) berdasarkan data ini:
+  Jenis kelamin: ${gender}
+  Usia: ${age != null ? age + ' tahun' : '-'}
+  Tekanan darah: ${latest.systolic != null ? latest.systolic+'/'+latest.diastolic+' mmHg' : '-'}
+  Gula darah: ${latest.bloodSugar != null ? latest.bloodSugar+' mg/dL ('+(latest.bloodSugarType||'-')+')' : '-'}
+  Kolesterol: ${latest.cholesterol != null ? latest.cholesterol+' mg/dL' : '-'}
+  Asam urat: ${latest.uricAcid != null ? latest.uricAcid+' mg/dL' : '-'}
+  
+  Langsung sapa dengan ramah dan berikan sarannya!`;
+  
+  try {
+    // 👇 KITA SEKARANG MENEMBAK KE BACKEND VERCEL KITA SENDIRI
+    // Tidak ada lagi API Key di kode HTML ini! Sangat bersih dan aman.
+    const response = await fetch('/api/ask-ai', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prompt: prompt })
+    });
+    
+    const data = await response.json();
+
+    if (!response.ok) {
+       throw new Error(data.error || "Gagal mendapatkan respons dari server Vercel.");
+    }
+    
+    if (data.choices && data.choices[0].message.content) {
+      const aiText = data.choices[0].message.content.replace(/\n/g, '<br>');
+      recoBody.innerHTML = `
+        <div style="background:#eef2f6; border-left:4px solid var(--navy); padding:14px; border-radius:8px; margin-bottom:14px;">
+          <h4 style="margin:0 0 8px 0; color:var(--navy); display:flex; align-items:center; gap:6px;">✨ Saran Personal Dokter AI</h4>
+          <div style="font-size:13px; line-height:1.6; color:#333;">${aiText}</div>
+        </div>
+      ` + prevHTML;
+    } else {
+      throw new Error("Format respons tidak dikenali.");
+    }
+    
+  } catch(e) {
+    console.error("askAI caught error:", e);
+    recoBody.innerHTML = prevHTML; 
+    alert(`Gagal terhubung ke AI: ${e.message}`);
+  } 
+}
+
+/* ---- History table ---- */
+async function renderHistory(){
+  const rec = await getWarga(currentUser);
+  const body = document.getElementById('history-body');
+  
+  if(!rec || !rec.records || rec.records.length === 0){
+    body.innerHTML = `<tr><td colspan="8" style="text-align:center;padding:20px;color:#888;">Belum ada data pemeriksaan.</td></tr>`;
+    return;
+  }
+
+  const gender = rec.gender || 'pria';
+  const age = ageFromBirthdate(rec.birthdate) || 30;
+
+  // 1. Urutkan data secara aman dari pemeriksaan TERBARU ke terlama
+  const recs = rec.records.slice().sort((a, b) => {
+    const dateA = a.date ? a.date.toString().split('T')[0] : '1970-01-01';
+    const dateB = b.date ? b.date.toString().split('T')[0] : '1970-01-01';
+    const timeA = a.time ? a.time.toString().match(/(\d{2}):(\d{2})/) : ['00:00', '00', '00'];
+    const timeB = b.time ? b.time.toString().match(/(\d{2}):(\d{2})/) : ['00:00', '00', '00'];
+    
+    const fullA = new Date(`${dateA}T${timeA ? timeA[0] : '00:00'}`);
+    const fullB = new Date(`${dateB}T${timeB ? timeB[0] : '00:00'}`);
+    return fullB - fullA;
+  });
+  
+  const fmtVal = (val) => (val != null && val !== "") ? val : '---';
+
+  // 2. Render baris tabel riwayat dengan pembersihan format
+  body.innerHTML = recs.map((r, i) => {
+    const bp = getStatus('tekanan_darah', 'all', gender, age, r.systolic, r.diastolic);
+    const gu = getStatus('gula_darah', r.bloodSugarType, gender, age, r.bloodSugar);
+    const ko = getStatus('kolesterol', 'all', gender, age, r.cholesterol);
+    const ua = getStatus('asam_urat', 'all', gender, age, r.uricAcid);
+    
+    // === LOGIKA FORMAT TANGGAL ANTI-GAGAL (Hasil: DD/MM/YYYY) ===
+    let tglTampil = '---';
+    if (r.date) {
+      const d = new Date(r.date);
+      if (!isNaN(d.valueOf())) {
+        const day = String(d.getDate()).padStart(2, '0');
+        const month = String(d.getMonth() + 1).padStart(2, '0');
+        const year = d.getFullYear();
+        tglTampil = `${day}/${month}/${year}`;
+      } else {
+        // Cadangan jika format string Sheets rusak
+        tglTampil = r.date.toString().split('T')[0];
+      }
+    }
+
+    // === LOGIKA FORMAT WAKTU ANTI-GAGAL (Hasil: HH:MM) ===
+    let waktuTampil = '---';
+    if (r.time) {
+      const tStr = r.time.toString();
+      if (tStr.includes('T') || tStr.includes('GMT')) {
+        const d = new Date(r.time);
+        if (!isNaN(d.valueOf())) {
+          waktuTampil = `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
+        }
+      } else {
+        // Mengambil pola jam:menit saja dari teks (misal: "10:30:00" -> "10:30")
+        const match = tStr.match(/(\d{2}):(\d{2})/);
+        waktuTampil = match ? `${match[1]}:${match[2]}` : tStr;
+      }
+    }
+
+    return `<tr>
+      <td>${i + 1}</td>
+      <td>${tglTampil}</td>
+      <td>${waktuTampil}</td>
+      <td>${bp ? `<i class="dot ${dotClass(bp.cls)}"></i> ` : ''}${r.systolic != null && r.systolic !== "" ? r.systolic + '/' + r.diastolic : '---'}</td>
+      <td>${r.bloodSugarType || '-'}</td>
+      <td>${gu ? `<i class="dot ${dotClass(gu.cls)}"></i> ` : ''}${fmtVal(r.bloodSugar)}</td>
+      <td>${ko ? `<i class="dot ${dotClass(ko.cls)}"></i> ` : ''}${fmtVal(r.cholesterol)}</td>
+      <td>${ua ? `<i class="dot ${dotClass(ua.cls)}"></i> ` : ''}${fmtVal(r.uricAcid)}</td>
+    </tr>`;
+  }).join('');
+}
+
+/* ---- Profile ---- */
+/* ---- Profile ---- */
+async function loadProfile(){
+  const rec = await getWarga(currentUser);
+  if(!rec) return;
+  
+  const pNama = document.getElementById('p-nama');
+  const pGender = document.getElementById('p-gender');
+  
+  pNama.value = rec.name;
+  pGender.value = rec.gender || '';
+  
+  pNama.readOnly = true;
+  pNama.style.backgroundColor = "#e9edf2"; 
+  pNama.style.cursor = "not-allowed";
+  
+  pGender.disabled = true;
+  pGender.style.backgroundColor = "#e9edf2";
+  pGender.style.cursor = "not-allowed";
+
+  // Mengonversi format tanggal panjang dari Google Sheets menjadi YYYY-MM-DD
+  let tglLahir = rec.birthdate || '';
+  if (tglLahir) {
+    const d = new Date(tglLahir);
+    if (!isNaN(d.valueOf())) {
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      tglLahir = `${y}-${m}-${day}`;
+    }
+  }
+  document.getElementById('p-tgl').value = tglLahir;
+  document.getElementById('p-telp').value = rec.phone || '';
+  document.getElementById('p-email').value = rec.email || '';
+  document.getElementById('p-notes').value = rec.notes || '';
+  
+  // Ubah foto di kotak profil
+  const circle = document.getElementById('p-photo-circle');
+  circle.innerHTML = rec.photo ? `<img src="${rec.photo}">` : '<img class="logo-sm" src="Assets/account_circle.png" onerror="this.style.display=\'none\'">';
+
+  // [BARU] Ubah foto di top bar saat profil dimuat
+  const topbarPhoto = document.getElementById('topbar-photo');
+  if (topbarPhoto) {
+    topbarPhoto.src = rec.photo ? rec.photo : "Assets/account_circle.png";
+  }
+}
+async function saveProfile(){
+  const rec = await getWarga(currentUser);
+  if(!rec) return;
+  rec.gender = document.getElementById('p-gender').value || rec.gender;
+  rec.birthdate = document.getElementById('p-tgl').value;
+  rec.phone = document.getElementById('p-telp').value;
+  rec.email = document.getElementById('p-email').value;
+  rec.notes = document.getElementById('p-notes').value;
+  const ok = await saveWargaData(rec);
+  if(ok) showToast('Profil berhasil disimpan.');
+}
+function handlePhoto(event){
+  const file = event.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e){
+    const img = new Image();
+    img.onload = async function(){
+      const canvas = document.createElement('canvas');
+      const size = 200;
+      canvas.width = size; canvas.height = size;
+      const ctx = canvas.getContext('2d');
+      const scale = Math.max(size/img.width, size/img.height);
+      const w = img.width*scale, h = img.height*scale;
+      ctx.drawImage(img, (size-w)/2, (size-h)/2, w, h);
+      
+      const dataUrl = canvas.toDataURL('image/jpeg', 0.7);
+      
+      // 1. Ubah foto di halaman profil
+      document.getElementById('p-photo-circle').innerHTML = `<img src="${dataUrl}">`;
+      
+      // 2. [BARU] Langsung ubah foto di top bar juga
+      const topbarPhoto = document.getElementById('topbar-photo');
+      if (topbarPhoto) topbarPhoto.src = dataUrl;
+
+      // 3. Simpan ke database
+      const rec = await getWarga(currentUser);
+      rec.photo = dataUrl;
+      await saveWargaData(rec);
+      showToast('Foto profil diperbarui.');
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+/* ---- Monthly chart ---- */
+/* ---- Monthly chart ---- */
+async function renderChart(recParam){
+  const rec = recParam || await getWarga(currentUser);
+  if(!rec) return;
+  const recs = rec.records||[];
+  
+  // Fungsi baca tahun dan bulan yang kebal terhadap berbagai format tanggal
+  const parseYearMonth = (d) => {
+      if (!d) return { y: null, m: null };
+      let s = d.toString().split('T')[0];
+      if (s.includes('/')) {
+          let p = s.split('/');
+          return { y: p[2], m: Number(p[1]) - 1 }; // Jika format DD/MM/YYYY
+      }
+      let p = s.split('-');
+      return { y: p[0], m: Number(p[1]) - 1 }; // Jika format YYYY-MM-DD
+  };
+
+  // Kumpulkan tahun yang tersedia dari data
+  const years = Array.from(new Set(recs.map(r => parseYearMonth(r.date).y).filter(Boolean)));
+  const curYear = new Date().getFullYear().toString();
+  if(years.length === 0) years.push(curYear);
+  years.sort();
+  
+  const sel = document.getElementById('chart-year');
+  const prevVal = sel.value;
+  
+  // Update opsi dropdown tahun
+  if(sel.options.length === 0 || !years.includes(prevVal)){
+    sel.innerHTML = years.map(y=>`<option value="${y}">${y}</option>`).join('');
+    sel.value = years.includes(prevVal) ? prevVal : years[years.length-1];
+  }
+  const year = sel.value;
+
+  const config = chartConfigs[currentChartIdx];
+  document.getElementById('chart-title-text').textContent = config.title;
+  const holder = document.getElementById('chart-svg-holder');
+
+  // Memasukkan data ke dalam array 12 Bulan (Januari - Desember)
+  if (config.key === 'tensi') {
+    const monthlySys = new Array(12).fill(null);
+    const monthlyDia = new Array(12).fill(null);
+    recs.forEach(r => {
+      let ym = parseYearMonth(r.date);
+      if(ym.y === year) {
+        if(r.systolic != null && r.systolic !== "") monthlySys[ym.m] = Number(r.systolic);
+        if(r.diastolic != null && r.diastolic !== "") monthlyDia[ym.m] = Number(r.diastolic);
+      }
+    });
+    drawDoubleLineChart(holder, monthlySys, monthlyDia, config.unit);
+  } else {
+    const monthly = new Array(12).fill(null);
+    recs.forEach(r => {
+      let ym = parseYearMonth(r.date);
+      if(ym.y === year) {
+        if (config.key === 'gula' && r.bloodSugar != null && r.bloodSugar !== "") monthly[ym.m] = Number(r.bloodSugar);
+        if (config.key === 'kolesterol' && r.cholesterol != null && r.cholesterol !== "") monthly[ym.m] = Number(r.cholesterol);
+        if (config.key === 'asam_urat' && r.uricAcid != null && r.uricAcid !== "") monthly[ym.m] = Number(r.uricAcid);
+      }
+    });
+    drawAreaChart(holder, monthly, config);
+  }
+}
+
+function changeChartYear(dir){
+  const sel = document.getElementById('chart-year');
+  const idx = sel.selectedIndex + dir;
+  if(idx>=0 && idx<sel.options.length){ sel.selectedIndex = idx; renderChart(); }
+}
+function drawAreaChart(holder, values, config){
+  const W=680, H=230, padL=55, padR=20, padT=16, padB=15;
+  const plotW=W-padL-padR, plotH=H-padT-padB;
+  const nums = values.filter(v=>v!=null);
+  let maxV = nums.length ? Math.max(...nums) : 100;
+  let minV = nums.length ? Math.min(...nums) : 50;
+  const top = Math.ceil((maxV+10)/10)*10;
+  const bottom = Math.max(0, Math.floor((minV-10)/10)*10);
+  
+  function xFor(i){ return padL + (i/11)*plotW; }
+  function yFor(v){ return padT + plotH - ((v-bottom)/(top-bottom))*plotH; }
+
+  const pts = values.map((v,i)=> v==null? null : [xFor(i), yFor(v)]);
+  const validPts = pts.filter(p=>p!==null);
+  let pathD = '', areaD = '';
+  if(validPts.length){
+    pathD = validPts.map((p,i)=> (i===0?'M ':'L ') + p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
+    const baseline = (padT+plotH).toFixed(1);
+    const first = validPts[0], last = validPts[validPts.length-1];
+    areaD = 'M '+first[0].toFixed(1)+' '+baseline+' '+pathD.replace(/^M /,'L ')+' L '+last[0].toFixed(1)+' '+baseline+' Z';
+  }
+
+  const gridVals = [top, Math.round((top+bottom)/2), bottom];
+  let gridSvg = gridVals.map(g=>`<line x1="${padL}" y1="${yFor(g).toFixed(1)}" x2="${W-padR}" y2="${yFor(g).toFixed(1)}" stroke="#e3e8ed" stroke-width="1"/>
+    <text x="4" y="${(yFor(g)+4).toFixed(1)}" font-size="10" fill="#7c93a8">${g}</text>`).join('');
+
+  // Menyesuaikan fill dan stroke titik agar persis dengan desain
+  let dots = pts.map((p,i)=> p? `<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="4" fill="#fff" stroke="${config.color}" stroke-width="2"/>` : '').join('');
+  let labels = MONTHS_SHORT.map((m,i)=> `<text x="${xFor(i).toFixed(1)}" y="${H-8}" font-size="10" fill="#556e85" text-anchor="middle">${m}</text>`).join('');
+
+  const svg = `<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;">
+    <defs><linearGradient id="areaGrad_${config.key}" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="${config.color}" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="${config.color}" stop-opacity="0.05"/>
+    </linearGradient></defs>
+    ${gridSvg}
+    <text x="4" y="12" font-size="9" fill="#7c93a8">${config.unit}</text>
+    ${areaD? `<path d="${areaD}" fill="url(#areaGrad_${config.key})"/>`:''}
+    ${pathD? `<path d="${pathD}" fill="none" stroke="${config.color}" stroke-width="2"/>`:''}
+    ${dots}
+    ${labels}
+  </svg>`;
+  holder.innerHTML = svg;
+}
+
+// Fungsi Khusus Grafik Tekanan Darah (Double Line)
+function drawDoubleLineChart(holder, sysVals, diaVals, unit) {
+  const W=680, H=230, padL=55, padR=20, padT=16, padB=25; // PadB ekstra untuk legenda
+  const plotW=W-padL-padR, plotH=H-padT-padB;
+  
+  const allNums = [...sysVals, ...diaVals].filter(v=>v!=null);
+  const maxV = allNums.length? Math.max(...allNums, 120) : 160;
+  const minV = allNums.length? Math.min(...allNums, 60) : 60;
+  const top = Math.ceil((maxV+20)/10)*10;
+  const bottom = Math.max(0, Math.floor((minV-20)/10)*10);
+  
+  function xFor(i){ return padL + (i/11)*plotW; }
+  function yFor(v){ return padT + plotH - ((v-bottom)/(top-bottom))*plotH; }
+
+  const gridVals = [top, Math.round((top+bottom)/2), bottom];
+  let gridSvg = gridVals.map(g=>`<line x1="${padL}" y1="${yFor(g).toFixed(1)}" x2="${W-padR}" y2="${yFor(g).toFixed(1)}" stroke="#e3e8ed" stroke-width="1"/>
+    <text x="4" y="${(yFor(g)+4).toFixed(1)}" font-size="10" fill="#7c93a8">${g}</text>`).join('');
+
+  function getLinePath(vals) {
+    const pts = vals.map((v,i)=> v==null? null : [xFor(i), yFor(v)]);
+    const validPts = vals.map((v, i) => v == null ? null : [xFor(i), yFor(v)]).filter(p => p !== null);
+    
+    if (validPts.length < 2) return ''; // Tidak bisa buat garis jika titik < 2
+    return validPts.length ? validPts.map((p,i)=> (i===0?'M ':'L ') + p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ') : '';
+  }
+
+  const pathSys = getLinePath(sysVals);
+  const pathDia = getLinePath(diaVals);
+
+  // Warna sesuai gambar (Oranye untuk Sistolik, Biru untuk Diastolik)
+  const dotsSys = sysVals.map((v,i)=> v!=null ? `<circle cx="${xFor(i).toFixed(1)}" cy="${yFor(v).toFixed(1)}" r="4" fill="#fff" stroke="#f0973b" stroke-width="2"/>` : '').join('');
+  const dotsDia = diaVals.map((v,i)=> v!=null ? `<circle cx="${xFor(i).toFixed(1)}" cy="${yFor(v).toFixed(1)}" r="4" fill="#fff" stroke="#3b82f6" stroke-width="2"/>` : '').join('');
+
+  let labels = MONTHS_SHORT.map((m,i)=> `<text x="${xFor(i).toFixed(1)}" y="${H-22}" font-size="10" fill="#556e85" text-anchor="middle">${m}</text>`).join('');
+
+  // Menambahkan Legenda Keterangan di pojok kiri bawah
+  const legendY = H-30;
+  const legend = `
+    <line x1="${padL}" y1="${H-8}" x2="${padL + 20}" y2="${H-8}" stroke="#f0973b" stroke-width="2"/>
+    <circle cx="${padL + 10}" cy="${H-8}" r="3" fill="#fff" stroke="#f0973b" stroke-width="1.5"/>
+    <text x="${padL + 28}" y="${H-5}" font-size="10" fill="#556e85">Sistolik</text>
+    
+    <line x1="${padL + 90}" y1="${H-8}" x2="${padL + 110}" y2="${H-8}" stroke="#3b82f6" stroke-width="2"/>
+    <circle cx="${padL + 100}" cy="${H-8}" r="3" fill="#fff" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="${padL + 118}" y="${H-5}" font-size="10" fill="#556e85">Diastolik</text>
+  `;
+
+  holder.innerHTML = `<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;">
+    ${gridSvg}
+    <text x="4" y="12" font-size="9" fill="#7c93a8">${unit}</text>
+    ${pathSys? `<path d="${pathSys}" fill="none" stroke="#f0973b" stroke-width="2"/>`:''}
+    ${pathDia? `<path d="${pathDia}" fill="none" stroke="#3b82f6" stroke-width="2"/>`:''}
+    ${dotsSys}
+    ${dotsDia}
+    ${labels}
+    ${legend}
+  </svg>`;
+}
+
+/* ================= HELPER FUNCTIONS - STATUS CHECKING ================= */
+
+/* ================= PETUGAS APP ================= */
+async function enterPetugasApp(){
+  showScreen(null);
+  document.getElementById('app-petugas').classList.remove('hidden');
+  await goPetugas('ringkasan');
+}
+function toggleSidebar(){
+  document.getElementById('petugas-sidebar').classList.toggle('open');
+}
+async function goPetugas(page){
+  ['ringkasan','daftar','manajemen'].forEach(p=>{
+    document.getElementById('ppage-'+p).classList.toggle('hidden', p!==page);
+    document.getElementById('petugas-sidebar').querySelectorAll('.sidebar-item').forEach(b=>{
+      if(b.dataset.p===page) b.classList.add('active'); else if(b.dataset.p) b.classList.remove('active');
+    });
+  });
+  document.getElementById('petugas-sidebar').classList.remove('open');
+  if(page==='ringkasan') await renderRingkasan();
+  if(page==='daftar') await renderDaftarWarga();
+  if(page==='manajemen') await switchMgmtTab('add');
+}
+
+function drawDonut(holder, segments, size){
+  size = size || 90;
+  const r = size/2 - 8, cx = size/2, cy = size/2, circ = 2*Math.PI*r;
+  let offset = 0;
+  const total = segments.reduce((a,s)=>a+s.value,0) || 1;
+  const circles = segments.map(s=>{
+    const frac = s.value/total;
+    const dash = frac*circ;
+    const el = `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${s.color}" stroke-width="14"
+      stroke-dasharray="${dash.toFixed(1)} ${(circ-dash).toFixed(1)}" stroke-dashoffset="${(-offset).toFixed(1)}"/>`;
+    offset += dash;
+    return el;
+  }).join('');
+  holder.innerHTML = `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
+    <g transform="rotate(-90 ${cx} ${cy})">${circles}</g>
+  </svg>`;
+}
+
+async function renderRingkasan(){
+  const all = await listAllWarga();
+  const totalPria = all.filter(w=>w.gender==='Pria').length;
+  const totalWanita = all.filter(w=>w.gender==='Wanita').length;
+  document.getElementById('total-warga').textContent = all.length;
+  document.getElementById('total-warga-sub').textContent = `Pria: ${totalPria} | Wanita: ${totalWanita}`;
+
+  let periksaCount=0, periksaPria=0, periksaWanita=0;
+  let sumSys=0,sumDia=0,cntBp=0, sumGula=0,cntGula=0, sumKol=0,cntKol=0;
+  let sumUaPria=0,cntUaPria=0, sumUaWanita=0,cntUaWanita=0;
+  const cats = {hipertensi:0,hipotensi:0,diabetes:0,hipoglikemia:0,hiperkol:0,hipokol:0,hiperurat:0,hipourat:0};
+  
+  // LOGIKA 1: Hapus indikator hipertensi 1,2,3 dari array overall
+  const overall = {normal:0,tinggi:0,rendah:0};
+  let withData=0;
+
+  all.forEach(w=>{
+    const n = (w.records||[]).length;
+    periksaCount += n;
+    if(w.gender==='Pria') periksaPria += n; else if(w.gender==='Wanita') periksaWanita += n;
+    
+    const latest = latestRecord(w);
+    if(!latest) return;
+    withData++;
+    
+    const gender = w.gender || 'pria';
+    const age = ageFromBirthdate(w.birthdate) || 30;
+
+    const bp = getStatus('tekanan_darah', 'all', gender, age, latest.systolic, latest.diastolic);
+    const gu = getStatus('gula_darah', latest.bloodSugarType, gender, age, latest.bloodSugar);
+    const ko = getStatus('kolesterol', 'all', gender, age, latest.cholesterol);
+    const ua = getStatus('asam_urat', 'all', gender, age, latest.uricAcid);
+    
+    // LOGIKA 2: Normalisasi, gabungkan semua level Hipertensi jadi "Tinggi"
+    const normalize = (st) => {
+        if(!st) return null;
+        let c = st.cls;
+        if(['hipertensi_1', 'hipertensi_2', 'hipertensi_3'].includes(c)) return 'tinggi';
+        return c;
+    };
+
+    const bpCls = normalize(bp);
+    const guCls = normalize(gu);
+    const koCls = normalize(ko);
+    const uaCls = normalize(ua);
+
+    if(bpCls){ overall[bpCls]++; if(bpCls==='tinggi') cats.hipertensi++; if(bpCls==='rendah') cats.hipotensi++; sumSys+=Number(latest.systolic); sumDia+=Number(latest.diastolic); cntBp++; }
+    if(guCls){ overall[guCls]++; if(guCls==='tinggi') cats.diabetes++; if(guCls==='rendah') cats.hipoglikemia++; sumGula+=Number(latest.bloodSugar); cntGula++; }
+    if(koCls){ overall[koCls]++; if(koCls==='tinggi') cats.hiperkol++; if(koCls==='rendah') cats.hipokol++; sumKol+=Number(latest.cholesterol); cntKol++; }
+    if(uaCls){ overall[uaCls]++; if(uaCls==='tinggi') cats.hiperurat++; if(uaCls==='rendah') cats.hipourat++;
+      if(w.gender==='Pria'){ sumUaPria+=Number(latest.uricAcid); cntUaPria++; } else { sumUaWanita+=Number(latest.uricAcid); cntUaWanita++; } }
+  });
+  
+  const denom = withData || 1;
+  const pct = v => Math.round(v/denom*100);
+  const items = [
+    ['Hipertensi',cats.hipertensi], ['Hipotensi',cats.hipotensi],
+    ['Diabetes',cats.diabetes], ['Hipoglikemia',cats.hipoglikemia],
+    ['Hiperkolesterolemia',cats.hiperkol], ['Hipokolesterolemia',cats.hipokol],
+    ['Hiperurisemia',cats.hiperurat], ['Hipourisemia',cats.hipourat],
+  ];
+  
+  // LOGIKA 3: Render tampilan Donut Kesehatan di dalam Javascript agar otomatis rapi
+  document.getElementById('indikasi-grid').innerHTML = items.map(([lbl,v])=>
+    `<div class="stat-box"><div class="pct">${pct(v)}%</div><div class="lbl">${lbl}</div></div>`).join('') +
+    `<div style="grid-column:1/-1; padding-top:20px; margin-top:10px; border-top:1px solid #eef2f6;">
+       <h4 style="text-align:center; color:var(--navy); margin-top:0; margin-bottom:14px;">Status Kesehatan Umum</h4>
+       <div id="donut-overall" style="display:flex;justify-content:center;"></div>
+       <div class="donut-legend">
+         <span><i class="dot dot-r"></i>Rendah</span>
+         <span><i class="dot dot-n"></i>Normal</span>
+         <span><i class="dot dot-t"></i>Tinggi</span>
+       </div>
+     </div>`;
+     
+  // LOGIKA 4: Menyeimbangkan ukuran Chart Donut menjadi 140px
+  drawDonut(document.getElementById('donut-overall'), [
+    {value:overall.normal, color:'#3fb950'}, {value:overall.waspada, color:'#f0973b'},
+    {value:overall.tinggi, color:'#e0453f'}, {value:overall.rendah, color:'#f1c40f'}
+  ], 140);
+
+  drawDonut(document.getElementById('donut-total'), [
+    {value:totalPria, color:'#0b4d86'}, {value:totalWanita, color:'#6dd5ed'}
+  ], 140);
+
+  document.getElementById('total-periksa').textContent = periksaCount;
+  document.getElementById('total-periksa-sub').textContent = `Pria: ${periksaPria} | Wanita: ${periksaWanita}`;
+
+  const avgSys = cntBp ? Math.round(sumSys / cntBp) : 0;
+  const avgDia = cntBp ? Math.round(sumDia / cntBp) : 0;
+  const avgBp = cntBp ? `${avgSys}/${avgDia}` : '---';
+  
+  const avgGula = cntGula ? Math.round(sumGula / cntGula) : '---';
+  const avgKol = cntKol ? Math.round(sumKol / cntKol) : '---';
+  
+  const avgUaW = cntUaWanita ? (sumUaWanita / cntUaWanita).toFixed(1) : '---';
+  const avgUaP = cntUaPria ? (sumUaPria / cntUaPria).toFixed(1) : '---';
+
+  // Render HTML ke komponen avg-grid dengan hasil yang sudah akurat
+  document.getElementById('avg-grid').innerHTML = `
+    <div class="avg-box">
+      <div class="lbl">Tekanan Darah</div>
+      <div class="v">${avgBp}</div>
+      <div style="font-size:10px; color:rgba(255,255,255,0.7);">mmHg</div>
+    </div>
+    <div class="avg-box">
+      <div class="lbl">Gula Darah</div>
+      <div class="v">${avgGula}</div>
+      <div style="font-size:10px; color:rgba(255,255,255,0.7);">mg/dL</div>
+    </div>
+    <div class="avg-box">
+      <div class="lbl">Kolesterol</div>
+      <div class="v">${avgKol}</div>
+      <div style="font-size:10px; color:rgba(255,255,255,0.7);">mg/dL</div>
+    </div>
+    <div class="avg-box">
+      <div class="lbl">Asam Urat</div>
+      <div class="mini-row">
+        <div>Wanita<br><b>${avgUaW}</b></div>
+        <div>Pria<br><b>${avgUaP}</b></div>
+      </div>
+      <div style="font-size:10px; color:rgba(255,255,255,0.7); margin-top:2px;">mg/dL</div>
+    </div>`;
+}
+
+// =========================================================================
+// LOGIKA DAFTAR WARGA: FILTER, SORTING, DAN INTEGRASI POPUP (DIPERBARUI)
+// =========================================================================
+
+async function renderDaftarWarga(){
+  const all = await listAllWarga();
+  
+  // Ambil Nilai dari Seluruh Kontrol Input & Dropdown Filter
+  const search = (document.getElementById('dw-search')?.value || '').toLowerCase();
+  const selectedDate = (document.getElementById('dw-date')?.value || '').trim();
+  const fGender = document.getElementById('filt-gender')?.value || '';
+  const fBp = document.getElementById('filt-bp')?.value || '';
+  const fGula = document.getElementById('filt-gula')?.value || '';
+  const fKol = document.getElementById('filt-kol')?.value || '';
+  const fUa = document.getElementById('filt-ua')?.value || '';
+  const fSort = document.getElementById('filt-sort')?.value || 'asc'; // Ambil opsi sorting
+
+  // Mapping Kelas Status yang Konsisten Sesuai Sistem CSV Anda
+  const clsMap = { 'Rendah': 'rendah', 'Normal': 'normal', 'Tinggi': 'tinggi', 'Waspada': 'waspada' };
+
+  // 1. Map Data & Normalisasi Status (Penyatuan Hipertensi 1,2,3 -> Tinggi)
+  let rows = all.map(w => {
+    const latest = latestRecord(w);
+    const gender = w.gender || 'pria';
+    const age = ageFromBirthdate(w.birthdate) || 30;
+
+    // Panggil status asli berbasis aturan CSV murni
+    const bpRaw = latest ? getStatus('tekanan_darah', 'all', gender, age, latest.systolic, latest.diastolic) : null;
+    const guRaw = latest ? getStatus('gula_darah', latest.bloodSugarType, gender, age, latest.bloodSugar) : null;
+    const koRaw = latest ? getStatus('kolesterol', 'all', gender, age, latest.cholesterol) : null;
+    const uaRaw = latest ? getStatus('asam_urat', 'all', gender, age, latest.uricAcid) : null;
+
+    // Fungsi normalisasi internal untuk menyatukan semua jenis hipertensi ke klaster kelas "tinggi"
+    const normalizeStatus = (st) => {
+      if (!st) return null;
+      let c = st.cls;
+      if (['hipertensi_1', 'hipertensi_2', 'hipertensi_3'].includes(c)) {
+        return { ...st, cls: 'tinggi' };
+      }
+      return st;
+    };
+
+    return {
+      w,
+      latest,
+      bp: normalizeStatus(bpRaw),
+      gu: normalizeStatus(guRaw),
+      ko: normalizeStatus(koRaw),
+      ua: normalizeStatus(uaRaw)
+    };
+  });
+
+  // 2. Eksekusi Logika Penyaringan Filter (Filtering Logic - Fitur 6a)
+  if (search) {
+    rows = rows.filter(r => r.w && r.w.name && typeof r.w.name === 'string' && r.w.name.toLowerCase().includes(search));
+  }
+  
+  if (selectedDate) {
+    rows = rows.filter(r => {
+      if (!r.latest || !r.latest.date) return false;
+      const latestDateStr = r.latest.date.toString().split('T')[0];
+      return latestDateStr === selectedDate;
+    });
+  }
+  
+  if (fGender) rows = rows.filter(r => r.w.gender === fGender);
+  if (fBp) rows = rows.filter(r => r.bp && r.bp.cls === clsMap[fBp]);
+  if (fGula) rows = rows.filter(r => r.gu && r.gu.cls === clsMap[fGula]);
+  if (fKol) rows = rows.filter(r => r.ko && r.ko.cls === clsMap[fKol]);
+  if (fUa) rows = rows.filter(r => r.ua && r.ua.cls === clsMap[fUa]);
+
+  // 3. Eksekusi Logika Pengurutan Alfabet Nama (Sorting Logic - Fitur 6c)
+  rows.sort((a, b) => {
+    const nameA = (a.w.name || '').toLowerCase();
+    const nameB = (b.w.name || '').toLowerCase();
+    if (fSort === 'desc') {
+      return nameB.localeCompare(nameA); // Z-A
+    }
+    return nameA.localeCompare(nameB); // A-Z (Default)
+  });
+
+  // 4. Render ke HTML Body Tabel Pasien Petugas
+  const body = document.getElementById('daftar-body');
+  if (!body) return;
+
+  if (rows.length === 0) {
+    body.innerHTML = `<tr><td colspan="10" style="text-align:center;padding:20px;color:#888;">Tidak ada data warga yang cocok dengan filter.</td></tr>`;
+    return;
+  }
+
+  const fmtVal = (val) => (val != null && val !== "") ? val : '---';
+
+  body.innerHTML = rows.map((r, i) => {
+    const age = ageFromBirthdate(r.w.birthdate);
+    // Escape string nama untuk menghindari kerentanan tanda petik saat dikirim ke fungsi detail pop-up
+    const escapedName = r.w.name.replace(/'/g, "\\'");
+
+    return `<tr>
+      <td>${i + 1}</td>
+      <td><b>${r.w.name}</b></td>
+      <td>${r.w.gender || '-'}</td>
+      <td>${age != null ? age + ' thn' : '-'}</td>
+      <td>${r.bp ? `<i class="dot ${dotClass(r.bp.cls)}"></i> ` : ''}${r.latest && r.latest.systolic != null && r.latest.systolic !== '' ? r.latest.systolic + '/' + r.latest.diastolic : '---'}</td>
+      <td>${r.latest ? (r.latest.bloodSugarType || '-') : '-'}</td>
+      <td>${r.gu ? `<i class="dot ${dotClass(r.gu.cls)}"></i> ` : ''}${r.latest ? fmtVal(r.latest.bloodSugar) : '---'}</td>
+      <td>${r.ko ? `<i class="dot ${dotClass(r.ko.cls)}"></i> ` : ''}${r.latest ? fmtVal(r.latest.cholesterol) : '---'}</td>
+      <td>${r.ua ? `<i class="dot ${dotClass(r.ua.cls)}"></i> ` : ''}${r.latest ? fmtVal(r.latest.uricAcid) : '---'}</td>
+      <td>
+        <button class="link-btn" style="font-weight:700; color:var(--navy); background:none; border:none; cursor:pointer;" onclick="showWargaDetail('${escapedName}')">🔍 Lihat</button>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+// 5. Fungsi Mengosongkan Seluruh Filter Sekaligus (Fitur 6b)
+function resetDaftarWargaFilter() {
+  document.getElementById('dw-search').value = '';
+  document.getElementById('dw-date').value = '';
+  document.getElementById('filt-gender').value = '';
+  document.getElementById('filt-bp').value = '';
+  document.getElementById('filt-gula').value = '';
+  document.getElementById('filt-kol').value = '';
+  document.getElementById('filt-ua').value = '';
+  document.getElementById('filt-sort').value = 'asc'; // Kembalikan ke A-Z
+  
+  // Segarkan halaman tabel secara instan setelah data dibersihkan
+  renderDaftarWarga();
+}
+
+async function showWargaDetail(name){
+  const w = await getWarga(name);
+  // Gunakan alert jika showToast tidak terdefinisi di sistem Anda
+  if(!w){ alert('Data warga tidak ditemukan.'); return; } 
+  
+  // 1. Urutkan riwayat dari yang PALING BARU ke terlama (Descending)
+  const recs = (w.records||[]).slice().sort((a,b)=> {
+    const dtA = (a.date||'') + (a.time||'');
+    const dtB = (b.date||'') + (b.time||'');
+    return dtB.localeCompare(dtA);
+  });
+  
+  const age = ageFromBirthdate(w.birthdate) || 30;
+  const gender = w.gender || 'pria';
+
+  // 2. Render Baris Tabel
+  let rowsHtml = recs.length ? recs.map((r,i) => {
+    // Gunakan getStatus dari CSV!
+    const bpRaw = getStatus('tekanan_darah', 'all', gender, age, r.systolic, r.diastolic);
+    const guRaw = getStatus('gula_darah', r.bloodSugarType, gender, age, r.bloodSugar);
+    const koRaw = getStatus('kolesterol', 'all', gender, age, r.cholesterol);
+    const uaRaw = getStatus('asam_urat', 'all', gender, age, r.uricAcid);
+
+    // Normalisasi hipertensi ke "tinggi" agar titik warnanya sama-sama merah
+    const normalize = (st) => {
+        if(!st) return null;
+        let c = st.cls;
+        if(['hipertensi_1', 'hipertensi_2', 'hipertensi_3'].includes(c)) return { ...st, cls: 'tinggi' };
+        return st;
+    };
+
+    const bp = normalize(bpRaw);
+    const gu = normalize(guRaw);
+    const ko = normalize(koRaw);
+    const ua = normalize(uaRaw);
+
+    // Format Tanggal yang rapi (DD/MM/YYYY)
+    let tglIndo = r.date;
+    if (r.date && r.date.includes('-')) {
+        const parts = r.date.split('T')[0].split('-');
+        if(parts.length === 3) tglIndo = `${parts[2]}/${parts[1]}/${parts[0]}`;
+    }
+    
+    // Format Waktu yang rapi (HH:MM)
+    let waktuTampil = r.time || '-';
+    if (waktuTampil && waktuTampil.includes(':')) {
+        const match = waktuTampil.toString().match(/(\d{2}):(\d{2})/);
+        if(match) waktuTampil = `${match[1]}:${match[2]}`;
+    }
+
+    const fmtVal = (val) => (val != null && val !== "") ? val : '---';
+
+    return `<tr>
+      <td>${i+1}</td>
+      <td>${tglIndo}</td>
+      <td>${waktuTampil}</td>
+      <td>${bp ? `<i class="dot ${dotClass(bp.cls)}"></i> ` : ''}${r.systolic!=null && r.systolic!=='' ? r.systolic+'/'+r.diastolic:'---'}</td>
+      <td>${r.bloodSugarType||'-'}</td>
+      <td>${gu ? `<i class="dot ${dotClass(gu.cls)}"></i> ` : ''}${fmtVal(r.bloodSugar)}</td>
+      <td>${ko ? `<i class="dot ${dotClass(ko.cls)}"></i> ` : ''}${fmtVal(r.cholesterol)}</td>
+      <td>${ua ? `<i class="dot ${dotClass(ua.cls)}"></i> ` : ''}${fmtVal(r.uricAcid)}</td>
+    </tr>`;
+  }).join('') : `<tr><td colspan=\"8\" style=\"text-align:center;padding:20px;color:#888;\">Belum ada data riwayat pemeriksaan.</td></tr>`;
+
+  // 3. Eksekusi Modal Pop-up
+  openModal(`
+    <h3 style="margin-top:0; color:var(--navy); font-size:20px;">${w.name}</h3>
+    <div style="font-size:13px; margin-bottom:16px; color:#456; background:#eef2f6; padding:12px; border-radius:8px; display:flex; gap:14px; flex-wrap:wrap;">
+      <span>Jenis Kelamin: <b>${w.gender||'-'}</b></span>
+      <span>Usia: <b>${age!=null ? age+' tahun' : '-'}</b></span>
+    </div>
+    <div class="table-wrap">
+      <table style="min-width:700px; width:100%;">
+        <thead>
+          <tr>
+            <th>No</th><th>Tanggal</th><th>Waktu</th>
+            <th>Tekanan Darah</th><th>Jenis Gula</th><th>Gula Darah</th>
+            <th>Kolesterol</th><th>Asam Urat</th>
+          </tr>
+        </thead>
+        <tbody>${rowsHtml}</tbody>
+      </table>
+    </div>
+  `);
+}
+
+
+/* ========================================================================= */
+/* MANAJEMEN DATA PETUGAS (TERINTEGRASI SPREADSHEET 100%)                    */
+/* ========================================================================= */
+
+// 1. Logika Pindah Tab (Otomatis mengambil data Spreadsheet terbaru)
+function switchMgmtTab(tab){
+  const tabs = ['add', 'del', 'akun'];
+  tabs.forEach(t => {
+    const btn = document.getElementById('mtab-' + t);
+    const sec = document.getElementById('msec-' + t);
+    if(btn) {
+      btn.style.background = tab === t ? 'var(--navy)' : '#eef2f6';
+      btn.style.color = tab === t ? '#fff' : 'var(--navy)';
+    }
+    if(sec) sec.classList.toggle('hidden', tab !== t);
+  });
+
+  if(tab === 'add'){
+    document.getElementById('madd-tanggal').value = todayStr();
+    document.getElementById('madd-waktu').value = nowTimeStr();
+    populateMgmtWargaDropdowns();
+  } else if (tab === 'del' || tab === 'akun') {
+    populateMgmtWargaDropdowns();
+  }
+}
+
+// 2. Toggle Layout Warga Baru & Warga Lama
+function toggleWargaMode() {
+  const mode = document.querySelector('input[name="warga_mode"]:checked').value;
+  if (mode === 'lama') {
+    document.getElementById('warga-lama-fields').classList.remove('hidden');
+    document.getElementById('warga-baru-fields').classList.add('hidden');
+  } else {
+    document.getElementById('warga-lama-fields').classList.add('hidden');
+    document.getElementById('warga-baru-fields').classList.remove('hidden');
+  }
+}
+
+// 3. Auto Generate Usia dari Tanggal Lahir
+function calculateNewAge() {
+  const bd = document.getElementById('madd-new-birthdate').value;
+  if (bd) {
+    const age = ageFromBirthdate(bd);
+    document.getElementById('madd-new-age').innerText = `Usia: ${age} tahun`;
+  } else {
+    document.getElementById('madd-new-age').innerText = `Usia: -`;
+  }
+}
+
+// 4. Update Semua Dropdown Warga serentak
+async function populateMgmtWargaDropdowns() {
+  const all = await listAllWarga();
+  const selectOld = document.getElementById('madd-old-nama');
+  const selectDel = document.getElementById('mdel-nama');
+  const selectAkun = document.getElementById('makun-nama');
+  
+  let options = '<option value="">-- Pilih Warga --</option>';
+  all.forEach(w => {
+    options += `<option value="${w.name}">${w.name}</option>`;
+  });
+  
+  if(selectOld) selectOld.innerHTML = options;
+  if(selectDel) selectDel.innerHTML = options;
+  if(selectAkun) selectAkun.innerHTML = options;
+}
+
+// 5. Simpan Data Pemeriksaan (Termasuk Registrasi Warga Baru)
+async function mgmtAddRecord() {
+  const btn = document.querySelector('button[onclick="mgmtAddRecord()"]');
+
+  if(!btn) return;
+  const oriText = btn.innerText;
+  
+  try {
+    const mode = document.querySelector('input[name="warga_mode"]:checked').value;
+    let namaWarga = '';
+    
+    // Validasi Mode Warga
+    if (mode === 'lama') {
+      namaWarga = document.getElementById('madd-old-nama').value;
+      if (!namaWarga) {
+        alert("Mohon pilih Warga Lama dari daftar terlebih dahulu!");
+        return;
+      }
+    } else {
+      namaWarga = document.getElementById('madd-new-nama').value.trim();
+      const gender = document.getElementById('madd-new-gender').value;
+      const birthdate = document.getElementById('madd-new-birthdate').value;
+      
+      if (!namaWarga || !birthdate) {
+        alert("Nama dan Tanggal Lahir WAJIB DIISI untuk Registrasi Warga Baru!");
+        return;
+      }
+      
+      btn.innerText = "Mendaftarkan Warga...";
+      btn.disabled = true;
+      
+
+      // Integrasi API: Simpan Profil Warga Baru ke Spreadsheet
+      const profilePayload = { action: "saveProfile", nama: namaWarga, gender: gender, birthdate: birthdate, phone: "", email: "", notes: "", photo: "" };
+      const pRes = await fetch(BACKEND_API_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(profilePayload) });
+      const pData = await pRes.json();
+      if (!pData.success) throw new Error("Gagal mendaftarkan warga: " + pData.error);
+    }
+    
+    // Ambil Nilai Rekam Medis
+    const tanggal = document.getElementById('madd-tanggal').value;
+    const waktu = document.getElementById('madd-waktu').value;
+    const sys = document.getElementById('madd-sys').value;
+    const dia = document.getElementById('madd-dia').value;
+    const gType = document.getElementById('madd-gula-type').value;
+    const gula = document.getElementById('madd-gula').value;
+    const kol = document.getElementById('madd-kol').value;
+    const au = document.getElementById('madd-ua').value;
+    
+    if (!tanggal || !waktu) { alert("Tanggal dan Waktu pemeriksaan wajib diisi!"); return; }
+    if (!sys && !dia && !gula && !kol && !au) { alert("Isi minimal 1 parameter pemeriksaan!"); return; }
+    
+    btn.innerText = "Menyimpan Pemeriksaan...";
+    btn.disabled = true;
+    // 👇 MENGGUNAKAN apiRequest ANTI-CORS
+    const profilePayload = { action: "saveProfile", nama: namaWarga, gender: gender, birthdate: birthdate, phone: "", email: "", notes: "", photo: "" };
+    await apiRequest(profilePayload);
+
+    // Integrasi API: Simpan Riwayat
+    const recordPayload = { action: "addRecord", nama: namaWarga, date: tanggal, time: waktu, systolic: sys, diastolic: dia, bloodSugarType: gType, bloodSugar: gula, cholesterol: kol, uricAcid: au };
+    const rRes = await fetch(BACKEND_API_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(recordPayload) });
+    const rData = await rRes.json();
+    
+    if (rData.success) {
+      alert("✅ Data berhasil disimpan ke Spreadsheet!");
+      
+      // Kosongkan form input
+      if(document.getElementById('madd-new-nama')) document.getElementById('madd-new-nama').value = '';
+      if(document.getElementById('madd-new-birthdate')) document.getElementById('madd-new-birthdate').value = '';
+      if(document.getElementById('madd-new-age')) document.getElementById('madd-new-age').innerText = 'Usia: -';
+      
+      ['madd-sys','madd-dia','madd-gula-type','madd-gula','madd-kol','madd-ua'].forEach(id => {
+         if(document.getElementById(id)) document.getElementById(id).value = '';
+      });
+      
+      // Sinkronisasi ulang data di layar
+      await populateMgmtWargaDropdowns();
+      
+      // Mengembalikan ke mode Warga Lama agar siap input massal
+      const btnModeLama = document.querySelector('input[name="warga_mode"][value="lama"]');
+      if (btnModeLama) {
+          btnModeLama.checked = true;
+          toggleWargaMode();
+      }
+      
+      const oldSelect = document.getElementById('madd-old-nama');
+      if (oldSelect) oldSelect.value = namaWarga;
+
+    } else {
+      throw new Error(rData.error);
+    }
+  } catch (err) {
+    alert("Terjadi kesalahan: " + err.message);
+  } finally {
+    btn.innerText = oriText;
+    btn.disabled = false;
+  }
+}
+
+// 6. Muat Riwayat Spesifik saat Hapus Riwayat
+async function mdelLoadRecords(){
+  const nama = document.getElementById('mdel-nama').value;
+  const sel = document.getElementById('mdel-record');
+  if(!sel) return;
+  sel.innerHTML='<option value="">-- Memuat Riwayat... --</option>';
+  
+  if(!nama) { sel.innerHTML='<option value="">-- Pilih Warga Dulu --</option>'; return; }
+  
+  const rec = await getWarga(nama);
+  if(!rec || !rec.records || rec.records.length === 0){
+    sel.innerHTML='<option value="">Tidak ada riwayat pemeriksaan.</option>'; return;
+  }
+  
+  const recs = (rec.records||[]).slice().sort((a,b)=> (b.date+b.time).localeCompare(a.date+a.time)); // Tampil Terbaru Terlebih Dahulu
+  
+  sel.innerHTML = recs.map((r,i)=>{
+    const tglArr = r.date ? r.date.split('T')[0].split('-') : ['-','-','-'];
+    const tglIndo = tglArr.length === 3 ? `${tglArr[2]}/${tglArr[1]}/${tglArr[0]}` : r.date;
+    
+    let waktuTampil = r.time;
+    if (waktuTampil) {
+        const match = waktuTampil.toString().match(/(\d{2}):(\d{2})/);
+        if(match) waktuTampil = `${match[1]}:${match[2]}`;
+    }
+
+    return `<option value="${i}">${tglIndo} (${waktuTampil||''}) - Tensi:${r.systolic!=null?r.systolic+'/'+r.diastolic:'-'} Gula:${r.bloodSugar!=null?r.bloodSugar:'-'} Kol:${r.cholesterol!=null?r.cholesterol:'-'} AU:${r.uricAcid!=null?r.uricAcid:'-'}</option>`;
+  }).join('');
+  
+  sel._sorted = recs;
+}
+
+// 7. Hapus 1 Baris Riwayat Pemeriksaan
+async function mgmtDeleteRecord(){
+  const nama = document.getElementById('mdel-nama').value;
+  const sel = document.getElementById('mdel-record');
+  if(!nama || !sel || sel.value==='') { alert('Pilih Warga dan pilih riwayat pemeriksaan yang ingin dihapus.'); return; }
+  
+  const target = sel._sorted[Number(sel.value)];
+  if(!target) return;
+  
+  if(confirm(`Yakin ingin menghapus pemeriksaan pada ${target.date}? Tindakan ini tidak dapat dibatalkan.`)) {
+    try {
+      const payload = { action: "deleteRecord", nama: nama, date: target.date, time: target.time };
+      await apiRequest(payload);
+      
+      if(data.success) {
+        alert('✅ Data riwayat pemeriksaan berhasil dihapus.'); 
+        await mdelLoadRecords(); 
+      } else { alert("Gagal menghapus riwayat: " + data.error); }
+    } catch(e) { alert("Kesalahan jaringan: " + e.message); }
+  }
+}
+
+// 8. Hapus Username Warga Penuh (Admin Tab)
+async function mgmtDeleteAkunWarga() {
+  const nama = document.getElementById('makun-nama').value;
+  if(!nama) { alert("Mohon pilih warga dari daftar terlebih dahulu!"); return; }
+  
+  if(confirm(`⚠ PERINGATAN KRITIS!\n\nApakah Anda YAKIN ingin menghapus akun "${nama}"?\nSeluruh data profil dan riwayat kesehatannya akan TERHAPUS PERMANEN dan tidak dapat dikembalikan!`)) {
+    try {
+      const payload = { action: "deleteWarga", nama: nama };
+      await apiRequest(payload);
+      
+      if(data.success) {
+        alert(`✅ Akun warga "${nama}" beserta rekam medisnya berhasil dihapus dari sistem.`);
+        document.getElementById('makun-nama').value = '';
+        await populateMgmtWargaDropdowns(); // Segarkan semua menu
+      } else { alert("Gagal menghapus akun: " + data.error); }
+    } catch(err) { alert("Kesalahan jaringan: " + err.message); }
+  }
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+require('dotenv').config(); // Pastikan dotenv diimpor dan dikonfigurasi di awal
+const express = require('express');
+const cors = require('cors');
+const axios = require('axios');
+
+const app = express();
+const PORT = 3000;
+
+// Ganti dengan URL Web App Anda jika berbeda
+const GAS_URL = "https://script.google.com/macros/s/AKfycbznL7zS1F4CxwShx2siGirYQqWJTNVT0BZ5UWGuMcdxQYA92PfCO8CVuokurUDQtZCa/exec";
+
+// Gunakan middleware
+app.use(cors()); 
+app.use(express.json()); 
+app.use(express.static(__dirname)); 
+
+// Endpoint API kita
+app.post('/api/database', async (req, res) => {
+    try {
+        console.log("Menerima permintaan dari web:", req.body.action);
+        
+        // PERBAIKAN UTAMA: Ubah req.body menjadi string murni agar bisa dibaca Google Apps Script
+        const payloadString = JSON.stringify(req.body);
+
+        const response = await axios.post(GAS_URL, payloadString, {
+            headers: { 
+                'Content-Type': 'text/plain;charset=utf-8' 
+            },
+            // Izinkan Axios mengikuti pengalihan URL (redirect) dari Google
+            maxRedirects: 5 
+        });
+
+        console.log("✅ Berhasil mendapat balasan dari Google!");
+        res.json(response.data);
+        
+    } catch (error) {
+        console.error("❌ Ralat Server:", error.message);
+        
+        // Tangkap pesan error spesifik dari Google agar kita tahu masalah aslinya
+        if (error.response) {
+            console.error("Status dari Google:", error.response.status);
+            // Potong teks error agar terminal tidak penuh jika Google membalas dengan HTML panjang
+            const errData = typeof error.response.data === 'string' 
+                ? error.response.data.substring(0, 150) + '... (terpotong)' 
+                : error.response.data;
+            console.error("Balasan dari Google:", errData);
+        }
+        
+        res.status(500).json({ success: false, error: "Gagal menyambung ke pangkalan data awan (cloud)" });
+    }
+});
+
+// Rute untuk menerima pertanyaan dari web HTML
+app.post('/api/tanya-ai', async (req, res) => {
+    try {
+        const pertanyaanWarga = req.body.pertanyaan;
+
+        // Memanggil server Groq AI dari backend
+        const response = await axios.post(
+            'https://api.groq.com/openai/v1/chat/completions',
+            {
+                model: "llama-3.1-8b-instant", // Model AI yang Anda gunakan
+                messages: [{ role: "user", content: pertanyaanWarga }]
+            },
+            {
+                headers: {
+                    // Di sinilah kunci rahasia Anda dipanggil dengan aman!
+                    'Authorization': `Bearer ${process.env.GROQ_API_KEY}`,
+                    'Content-Type': 'application/json'
+                }
+            }
+        );
+
+        // Menangkap jawaban AI dan mengirimkannya kembali ke web HTML
+        const jawabanAI = response.data.choices[0].message.content;
+        res.json({ success: true, data: jawabanAI });
+
+    } catch (error) {
+        console.error("Error dari Groq:", error.response ? error.response.data : error.message);
+        res.status(500).json({ success: false, pesan: "Gagal menghubungi AI" });
+    }
+});
+
+// Jalankan server
+app.listen(PORT, () => {
+    console.log(`✅ Server Backend KKN berjaya dijalankan di http://localhost:${PORT}`);
+});
